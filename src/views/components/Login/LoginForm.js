@@ -55,10 +55,18 @@ class LoginForm extends Component {
       },
       body: JSON.stringify(data),
     })
-    
+
     if (response.ok) {
-      let token = await response.json().then(json => json.token);
-      console.log(token);
+      try {
+        let token = await response.json().then(json => json.token);
+        this.props.onLogin(token);
+      } 
+      catch (error) {
+        this.props.onFailedLogin();
+      }
+    }
+    else {
+      this.props.onFailedLogin();
     }
 
   }

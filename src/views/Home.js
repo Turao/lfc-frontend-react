@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { Route } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-import MenuAppBar from '../MenuAppBar';
-import Login from '../Login'
-import Signup from '../Signup'
+import MenuAppBar from './components/MenuAppBar';
 
 const styles = {
 };
@@ -20,8 +18,6 @@ class Home extends Component {
     return (
       <div>
         <MenuAppBar title='LFC'></MenuAppBar>
-        <Route path='/login' component={Login}></Route>
-        <Route path='/signup' component={Signup}></Route>
       </div>
     );
   }

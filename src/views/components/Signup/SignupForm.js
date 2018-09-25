@@ -56,7 +56,10 @@ class SignupForm extends Component {
     })
     
     if (response.ok) {
-      console.log('Succesfully Signed Up');
+      this.props.onSignup();
+    }
+    else {
+      this.props.onFailedSignup();
     }
 
   }

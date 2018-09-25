@@ -20,9 +20,9 @@ class SimpleList extends Component {
       return (
         <List component="nav">
         {
-            this.props.items.map( item => {
+            this.props.items.map( (item, i) => {
               return (
-                <ListItem button>
+                <ListItem button key={i}>
                   <ListItemText 
                     primary={item.primary}
                     secondary={item.secondary}
