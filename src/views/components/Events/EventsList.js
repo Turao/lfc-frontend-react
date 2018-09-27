@@ -21,7 +21,9 @@ class EventList extends Component {
     this.state = {
       events: [],
     };
+  };
 
+  componentDidMount() {
     this.fetchLatestEvents();
   };
 
