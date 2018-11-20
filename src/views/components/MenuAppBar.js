@@ -4,22 +4,12 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
-// debug toggler
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup';
-
 // app bar
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 
 // bar content
 import Typography from '@material-ui/core/Typography';
-
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import Drawer from '@material-ui/core/Drawer';
-
 import Button from '@material-ui/core/Button';
 
 
@@ -32,82 +22,44 @@ class MenuAppBar extends Component {
     super(props);
     
     this.state = {
-      auth: false,
-      drawerOpen: false,
+      loggedIn: sessionStorage.getItem('logged'),
     };
   }
 
-  handleChange = event => {
-    this.setState({ auth: event.target.checked });
-  };
-
+  logout = () => {
+    sessionStorage.removeItem('logged');
+    sessionStorage.removeItem('userToken');
+    this.setState({'loggedIn': false});
+  }
   
-  toggleDrawer = open => () => {
-    this.setState({
-      drawerOpen: open,
-    });
-  };
-
-
   render() {
 
-    const drawerList = (
-      null
-    );
-
-    const drawer = (
-      <Drawer 
-        open={this.state.drawerOpen} 
-        onClose={this.toggleDrawer(false)}>
-          <div
-            tabIndex={0}
-            role="button"
-            onClick={this.toggleDrawer(false)}
-            onKeyLeft={this.toggleDrawer(false)}
-            onKeyRight={this.toggleDrawer(true)} >
-              { drawerList }
-          </div>
-      </Drawer>
-    );
-
-    const renderLoginSignup = (
+    const renderNotLoggedInContent = (
       <div>
         <Button component={Link} to='/login'> Log In </Button>
         <Button component={Link} to='/signup'> Sign Up </Button>
       </div>
     );
 
-    const debugToggler = (
-      <FormGroup>
-        <FormControlLabel control={
-            <Switch checked={this.state.auth} onChange={this.handleChange}/>
-          }
-          label={this.state.auth ? 'Logout' : 'Login'}
-        />
-      </FormGroup>
+    const renderLoggedInContent = (
+      <div>
+        <Button component={Link} to='/events'> Events </Button>
+        <Button component={Link} to='/account'> Me </Button>
+        <Button component={Link} onClick={this.logout} to='/'> Log Out </Button>
+      </div>
     );
 
     return (
       <div>
-        { debugToggler }
-        
-
-
-
         <AppBar position="static">
           <Toolbar>
-            
-            <IconButton onClick={this.toggleDrawer(true)}>
-              <MenuIcon/>
-            </IconButton>
-            { drawer }
-            
+             
             <Typography 
               variant="title">
               { this.props.title }
             </Typography>
             
-            {this.state.auth ? null : renderLoginSignup }
+            { this.state.loggedIn ? renderLoggedInContent : renderNotLoggedInContent }
 
           </Toolbar>
         </AppBar>

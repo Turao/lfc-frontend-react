@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
 import EventsList from './components/Events/EventsList';
+import MenuAppBar from './components/MenuAppBar';
 
 const styles = {
 };
@@ -15,15 +16,12 @@ class Events extends Component {
     };
   };
 
-  handleChange = prop => event => {
-    this.setState({
-      [prop]: event.target.value,
-    });
-  };
-
   render() {
     return (
-      <EventsList></EventsList>
+      <div>
+        <MenuAppBar/>
+        <EventsList></EventsList>
+      </div>
     );
   }
 }

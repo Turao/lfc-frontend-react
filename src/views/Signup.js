@@ -10,7 +10,6 @@ const styles = {
 };
 
 
-
 class Signup extends Component {
   constructor(props) {
     super(props);
@@ -26,12 +25,6 @@ class Signup extends Component {
 
   onFailedSignup() {
     console.log('failed to sign up');
-  };
-
-  handleChange = prop => event => {
-    this.setState({
-      [prop]: event.target.value,
-    });
   };
 
   render() {

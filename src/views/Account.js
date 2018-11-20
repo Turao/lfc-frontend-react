@@ -6,7 +6,9 @@ import MenuAppBar from './components/MenuAppBar';
 const styles = {
 };
 
-class Home extends Component {
+
+
+class Account extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,10 +18,10 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <MenuAppBar title='LFC'></MenuAppBar>
+        <MenuAppBar/>
       </div>
     );
   }
 }
 
-export default withStyles(styles)(Home)
+export default withStyles(styles)(Account);

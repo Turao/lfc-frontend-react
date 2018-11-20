@@ -11,7 +11,6 @@ const styles = {
 };
 
 
-
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -24,7 +23,7 @@ class Login extends Component {
     console.log('logged in');
 
     console.log('user token:', token);
-    localStorage.setItem('userToken', token);
+    sessionStorage.setItem('userToken', token);
 
     sessionStorage.setItem('logged', true);
     this.setState({logged: true});
@@ -32,13 +31,6 @@ class Login extends Component {
 
   onFailedLogin() {
     console.log('failed to log in');
-  };
-
-
-  handleChange = prop => event => {
-    this.setState({
-      [prop]: event.target.value,
-    });
   };
 
   render() {
@@ -54,7 +46,7 @@ class Login extends Component {
           onFailedLogin={this.onFailedLogin.bind(this)}/>
 
 
-        { this.state.logged ? <Redirect to='/me'/> : null }
+        { this.state.logged ? <Redirect to='/'/> : null }
       </Grid>
     );
   }

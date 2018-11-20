@@ -1,25 +1,18 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import { Redirect } from 'react-router-dom';
 
 import SimpleList from '../SimpleList';
 
 const styles = {
 };
 
-// let events = [
-//   { primary: 'Evento', secondary: 'A' },
-//   { primary: 'Evento', secondary: 'B' },
-//   { primary: 'Evento', secondary: 'C' },
-//   { primary: 'Evento', secondary: 'D' },
-//   { primary: 'Evento', secondary: 'E' },
-//   { primary: 'Evento', secondary: 'F' },
-// ]
-
 class EventList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       events: [],
+      redirectTo: null,
     };
   };
 
@@ -40,22 +33,31 @@ class EventList extends Component {
       let events = await response.json().then(json => json.events);
       events = events.map( event => { return {
         primary: event.name,
-        secondary: event.organization.name
+        secondary: event.organization.name,
+        eventId: event._id,
+        onClick: this.handleClick.bind(this),
       }})
 
       this.setState({events: events});
     }
   };
 
-  handleChange = prop => event => {
-    this.setState({
-      [prop]: event.target.value,
-    });
+  handleClick(evt) {
+    console.log(evt);
+    this.setState({redirectTo: evt});
   };
 
   render() {
     return (
-      <SimpleList items={this.state.events}></SimpleList>
+      <div>
+        <SimpleList items={this.state.events}></SimpleList>
+        { 
+          this.state.redirectTo ? 
+            <Redirect to={'/event/' + this.state.redirectTo.eventId}/> 
+            : null 
+        }
+      </div>
+
     );
   }
 }
