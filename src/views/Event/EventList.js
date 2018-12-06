@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Redirect } from 'react-router-dom';
 
-import SimpleList from '../SimpleList';
+import SimpleList from '../components/SimpleList';
 
 const styles = {
 };

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
-import EventsList from './components/Events/EventsList';
-import MenuAppBar from './components/MenuAppBar';
+import EventList from './EventList';
+import MenuAppBar from '../components/MenuAppBar';
 
 const styles = {
 };
@@ -20,7 +20,7 @@ class Events extends Component {
     return (
       <div>
         <MenuAppBar/>
-        <EventsList></EventsList>
+        <EventList></EventList>
       </div>
     );
   }
