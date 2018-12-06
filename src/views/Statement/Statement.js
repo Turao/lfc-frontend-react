@@ -13,8 +13,8 @@ class Statement extends Component {
   render() {
     return (
       <div>
-        <h1> Full Name: {this.state.fullName} </h1>
-        <p> E-mail: {this.state.email} </p>
+        <h1> {this.state.fullName} </h1>
+        <p> {this.state.email} </p>
       </div>
     );
   }

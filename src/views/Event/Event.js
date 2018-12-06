@@ -33,8 +33,8 @@ class Event extends Component {
   render() {
     return (
       <div>
-        <h1> Event: {this.state.name} </h1>
-        <h2> Organization: {this.state.organization.name} </h2>
+        <h1> {this.state.name} </h1>
+        <h2> {this.state.organization.name} </h2>
         { this.renderModerators() }
         { this.renderStatements() }
       </div>

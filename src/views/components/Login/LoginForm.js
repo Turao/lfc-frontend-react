@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
 
 import FormGroup from '@material-ui/core/FormGroup';
 
@@ -17,11 +16,6 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 // Submit Button
 import Button from '@material-ui/core/Button';
-
-
-const styles = {
-};
-
 
 
 class LoginForm extends Component {
@@ -123,4 +117,4 @@ class LoginForm extends Component {
   }
 }
 
-export default withStyles(styles)(LoginForm);
+export default LoginForm;

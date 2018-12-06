@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import { Redirect } from 'react-router-dom';
 
-import Grid from '@material-ui/core/Grid'
-
 import SignupForm from './components/Signup/SignupForm';
-
-const styles = {
-};
 
 
 class Signup extends Component {
@@ -29,21 +23,15 @@ class Signup extends Component {
 
   render() {
     return (
-      <Grid 
-        container 
-        direction='column'
-        alignContent='center'
-        alignItems='center'>
-
+      <div>
         <SignupForm
           onSignup={this.onSignup.bind(this)}
           onFailedSignup={this.onFailedSignup.bind(this)}/>
 
           { this.state.redirect ? <Redirect to='/login'/> : null }
-
-      </Grid>
+      </div>
     );
   }
 }
 
-export default withStyles(styles)(Signup);
+export default Signup;

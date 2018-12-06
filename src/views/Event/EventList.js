@@ -1,46 +1,27 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import { Redirect } from 'react-router-dom';
 
 import SimpleList from '../components/SimpleList';
-
-const styles = {
-};
 
 class EventList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      events: [],
+      events: this.toSimpleListItem(this.props.events),
       redirectTo: null,
     };
   };
 
-  componentDidMount() {
-    this.fetchLatestEvents();
-  };
-
-  async fetchLatestEvents() {
-    let response = await fetch('http://localhost:3001/api/events/latest', {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-    })
-
-    if (response.ok && response.body) {
-      let events = await response.json().then(json => json.events);
-      events = events.map( event => { return {
-        primary: event.name,
-        secondary: event.organization.name,
-        eventId: event._id,
+  toSimpleListItem(evts) {
+    return evts.map(e => {
+      return {
+        primary: e.name,
+        secondary: e.organization.name,
+        eventId: e._id,
         onClick: this.handleClick.bind(this),
-      }})
-
-      this.setState({events: events});
-    }
-  };
+      }
+    })
+  }
 
   handleClick(evt) {
     console.log(evt);
@@ -62,4 +43,4 @@ class EventList extends Component {
   }
 }
 
-export default withStyles(styles)(EventList);
+export default EventList;

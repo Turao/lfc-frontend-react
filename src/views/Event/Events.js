@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
 
 import EventList from './EventList';
-import MenuAppBar from '../components/MenuAppBar';
-
-const styles = {
-};
+import loadModelData from '../components/ModelLoader';
 
 
 
@@ -13,17 +9,17 @@ class Events extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      ...this.props.data,
     };
   };
 
   render() {
     return (
       <div>
-        <MenuAppBar/>
-        <EventList></EventList>
+        <EventList events={this.state.events}></EventList>
       </div>
     );
   }
 }
 
-export default withStyles(styles)(Events);
+export default loadModelData(Events, 'events');

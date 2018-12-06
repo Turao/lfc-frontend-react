@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-
 // app bar
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -14,9 +11,6 @@ import Button from '@material-ui/core/Button';
 
 
 
-const styles = {
-};
-
 class MenuAppBar extends Component {
   constructor(props) {
     super(props);
@@ -24,6 +18,18 @@ class MenuAppBar extends Component {
     this.state = {
       loggedIn: sessionStorage.getItem('logged'),
     };
+
+  }
+
+
+  componentDidUpdate() {
+    this.hasLoggedInStatusChanged()
+  }
+
+  hasLoggedInStatusChanged() {
+    if(this.state.loggedIn !== Boolean(sessionStorage.getItem('logged'))) {
+      this.setState({loggedIn: !this.state.loggedIn})
+    }
   }
 
   logout = () => {
@@ -68,8 +74,4 @@ class MenuAppBar extends Component {
   }
 }
 
-MenuAppBar.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(MenuAppBar);
+export default MenuAppBar;

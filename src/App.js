@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom'
 
+import MenuAppBar from './views/components/MenuAppBar';
+import { Grid } from '@material-ui/core';
+
 import Home from './views/Home'
 import Login from './views/Login'
 import Signup from './views/Signup'
@@ -26,29 +29,39 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Route exact path='/' component={Home}></Route>
+        <MenuAppBar title="LFC"/>
+
+        <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+        >
+
+          <Route exact path='/' component={Home}></Route>
+          
+          <Route path='/login' component={Login}></Route>
+          <Route path='/signup' component={Signup}></Route>
+          
+          <Route path='/me' component={Account}></Route>
+          
+          <Route path='/events' component={Events}></Route>
+          <Route path='/event/:id' component={Event}></Route>
+
+          <Route path='/user/:id' component={User}></Route>
+
+
+          {/* debug only */}
+          <Route path='/checker/:id' component={Checker}></Route>
+          <Route path='/factcheck/:id' component={FactCheck}></Route>
+          <Route path='/moderator/:id' component={Moderator}></Route>
+          <Route path='/organization/:id' component={Organization}></Route>
+          <Route path='/party/:id' component={Party}></Route>
+          <Route path='/politician/:id' component={Politician}></Route>
+          <Route path='/source/:id' component={Source}></Route>
+          <Route path='/statement/:id' component={Statement}></Route>
         
-        <Route path='/login' component={Login}></Route>
-        <Route path='/signup' component={Signup}></Route>
-        
-        <Route path='/me' component={Account}></Route>
-        
-        <Route path='/events' component={Events}></Route>
-        <Route path='/event/:id' component={Event}></Route>
-
-        <Route path='/user/:id' component={User}></Route>
-
-
-
-        {/* debug only */}
-        <Route path='/checker/:id' component={Checker}></Route>
-        <Route path='/factcheck/:id' component={FactCheck}></Route>
-        <Route path='/moderator/:id' component={Moderator}></Route>
-        <Route path='/organization/:id' component={Organization}></Route>
-        <Route path='/party/:id' component={Party}></Route>
-        <Route path='/politician/:id' component={Politician}></Route>
-        <Route path='/source/:id' component={Source}></Route>
-        <Route path='/statement/:id' component={Statement}></Route>
+        </Grid>
       </div>
     );
   }

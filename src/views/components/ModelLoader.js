@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-
-import MenuAppBar from './MenuAppBar';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 export default function loadModelData(WrappedComponent, endpoint) {
@@ -21,7 +19,9 @@ export default function loadModelData(WrappedComponent, endpoint) {
     };
   
     async fetchData() {
-      const url = 'http://localhost:3001/api/'+endpoint+'/'+this.state._id
+      let url = 'http://localhost:3001/api/'+endpoint+'/'
+      url = this.state._id ? url+this.state._id : url
+      
       let response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -42,17 +42,16 @@ export default function loadModelData(WrappedComponent, endpoint) {
     renderData() {
       return <WrappedComponent data={this.state.data} {...this.props}/> // delegate rendering
     }
+
+    renderLoading() {
+      return (
+        <CircularProgress/>
+      )
+    }
   
   
     render() {
-      return (
-        <div>
-          <MenuAppBar/>
-          
-          { this.state.data ? this.renderData() : null }
-          
-        </div>
-      );
+      return this.state.data ? this.renderData() : this.renderLoading()
     }
 
   }

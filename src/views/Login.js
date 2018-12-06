@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import { Redirect } from 'react-router-dom';
-
-import Grid from '@material-ui/core/Grid'
 
 // Normal Login Strategy
 import LoginForm from './components/Login/LoginForm';
-
-const styles = {
-};
 
 
 class Login extends Component {
@@ -35,21 +29,15 @@ class Login extends Component {
 
   render() {
     return (
-      <Grid 
-        container 
-        direction='column'
-        alignContent='center'
-        alignItems='center'>
-
+      <div>
         <LoginForm 
           onLogin={this.onLogin.bind(this)}
           onFailedLogin={this.onFailedLogin.bind(this)}/>
 
-
         { this.state.logged ? <Redirect to='/'/> : null }
-      </Grid>
+      </div>
     );
   }
 }
 
-export default withStyles(styles)(Login);
+export default Login;

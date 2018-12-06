@@ -1,11 +1,4 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-
-import MenuAppBar from './components/MenuAppBar';
-
-const styles = {
-};
-
 
 
 class Account extends Component {
@@ -18,10 +11,9 @@ class Account extends Component {
   render() {
     return (
       <div>
-        <MenuAppBar/>
       </div>
     );
   }
 }
 
-export default withStyles(styles)(Account);
+export default Account;
