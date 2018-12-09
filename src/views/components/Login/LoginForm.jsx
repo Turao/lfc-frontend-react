@@ -30,7 +30,7 @@ class LoginForm extends Component {
   }
 
 
-  async handleSubmit() {
+  handleSubmit = async () => {
     const { email, password } = this.state;
     const { onLogin, onFailedLogin } = this.props;
     console.log(onLogin, onFailedLogin);
@@ -67,7 +67,7 @@ class LoginForm extends Component {
     }
   }
 
-  handleChange = prop => event => {
+  handleChange = prop => (event) => {
     this.setState({
       [prop]: event.target.value,
     });
@@ -112,8 +112,7 @@ class LoginForm extends Component {
             />
           </FormControl>
 
-          <Button onClick={this.handleSubmit.bind(this)}> Login </Button>
-          {/* <Button onClick={this.handleSubmit}> Login </Button> */}
+          <Button onClick={this.handleSubmit}> Login </Button>
 
         </FormGroup>
       </form>

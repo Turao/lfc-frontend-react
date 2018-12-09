@@ -30,7 +30,7 @@ class SignupForm extends Component {
     };
   }
 
-  async handleSubmit() {
+  handleSubmit = async () => {
     const { fullName, email, password } = this.state;
     const { onSignup, onFailedSignup } = this.props;
 
@@ -60,7 +60,7 @@ class SignupForm extends Component {
     }
   }
 
-  handleChange = prop => event => {
+  handleChange = prop => (event) => {
     this.setState({
       [prop]: event.target.value,
     });
@@ -114,8 +114,7 @@ class SignupForm extends Component {
             />
           </FormControl>
 
-          <Button onClick={this.handleSubmit.bind(this)}> Sign Up </Button>
-          {/* <Button onClick={this.handleSubmit}> Sign Up </Button> */}
+          <Button onClick={this.handleSubmit}> Sign Up </Button>
 
         </FormGroup>
       </form>

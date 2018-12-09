@@ -33,7 +33,7 @@ class EventForm extends Component {
     console.log('coulnt create the event');
   }
 
-  async handleSubmit() {
+  handleSubmit = async () => {
     const { name, selectedOrganization } = this.state;
     const data = {
       event: {
@@ -85,7 +85,7 @@ class EventForm extends Component {
             onChange={this.handleChange('name')}
           />
 
-          <Button onClick={this.handleSubmit.bind(this)}> Create Event </Button>
+          <Button onClick={this.handleSubmit}> Create Event </Button>
 
         </FormGroup>
       </form>

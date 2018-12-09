@@ -17,7 +17,7 @@ class User extends Component {
   render() {
     const { fullName, email } = this.state;
     return (
-      <div>
+      <React.Fragment>
         <h1>
           { fullName }
         </h1>
@@ -25,7 +25,7 @@ class User extends Component {
         <h2>
           { email }
         </h2>
-      </div>
+      </React.Fragment>
     );
   }
 }

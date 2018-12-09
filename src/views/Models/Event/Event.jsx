@@ -24,12 +24,12 @@ class Event extends Component {
   renderModerators() {
     const { moderators } = this.state;
     return (
-      <div>
+      <React.Fragment>
         <h2> Moderators </h2>
         {
           moderators.map(moderator => moderator.name)
         }
-      </div>
+      </React.Fragment>
     );
   }
 
@@ -43,7 +43,7 @@ class Event extends Component {
   render() {
     const { name, organization } = this.state;
     return (
-      <div>
+      <React.Fragment>
         <h1>
           { name }
         </h1>
@@ -54,7 +54,7 @@ class Event extends Component {
 
         { this.renderModerators() }
         { this.renderStatements() }
-      </div>
+      </React.Fragment>
     );
   }
 }

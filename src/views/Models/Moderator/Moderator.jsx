@@ -16,9 +16,9 @@ class Moderator extends Component {
   render() {
     const { something } = this.state;
     return (
-      <div>
+      <React.Fragment>
         { something }
-      </div>
+      </React.Fragment>
     );
   }
 }

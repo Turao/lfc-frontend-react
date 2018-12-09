@@ -13,7 +13,7 @@ class Login extends Component {
     };
   }
 
-  onLogin = token => {
+  onLogin = (token) => {
     console.log('logged in');
 
     console.log('user token:', token);
@@ -30,14 +30,14 @@ class Login extends Component {
   render() {
     const { logged } = this.state;
     return (
-      <div>
+      <React.Fragment>
         <LoginForm
           onLogin={this.onLogin}
           onFailedLogin={this.onFailedLogin}
         />
 
         { logged ? <Redirect to="/" /> : null }
-      </div>
+      </React.Fragment>
     );
   }
 }

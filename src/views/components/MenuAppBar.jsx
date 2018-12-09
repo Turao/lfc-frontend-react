@@ -47,29 +47,31 @@ class MenuAppBar extends Component {
     );
 
     const renderLoggedInContent = (
-      <div>
+      <React.Fragment>
         <Button component={Link} to="/events"> Events </Button>
         <Button component={Link} to="/account"> Me </Button>
         <Button component={Link} onClick={this.logout} to="/"> Log Out </Button>
-      </div>
+      </React.Fragment>
     );
 
     const { title } = this.props;
     const { loggedIn } = this.state;
     return (
-      <div>
+      <React.Fragment>
         <AppBar position="static">
           <Toolbar>
 
             <Typography variant="title">
-              { title }
+              <Button component={Link} to="/">
+                { title }
+              </Button>
             </Typography>
 
             { loggedIn ? renderLoggedInContent : renderNotLoggedInContent }
 
           </Toolbar>
         </AppBar>
-      </div>
+      </React.Fragment>
     );
   }
 }

@@ -1,32 +1,33 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+// import CheckerList from './CheckersList';
 import loadModelData from '../ModelLoader';
 
-class FactCheck extends Component {
+
+class Parties extends Component {
   constructor(props) {
     super(props);
-    const { something } = props.data;
+    const { parties } = props.data;
     this.state = {
-      something,
+      parties,
     };
   }
 
-
   render() {
-    const { something } = this.state;
+    const { parties } = this.state;
     return (
       <React.Fragment>
-        { something }
+        {/* <EventList events={events} /> */}
       </React.Fragment>
     );
   }
 }
 
-FactCheck.propTypes = {
+Parties.propTypes = {
   data: PropTypes.shape({
-    something: PropTypes.string.isRequired,
+    // user: PropTypes.object,
   }).isRequired,
 };
 
-export default loadModelData(FactCheck, 'factCheck');
+export default loadModelData(Parties, 'parties');

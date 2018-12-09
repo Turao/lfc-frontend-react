@@ -34,7 +34,7 @@ class EventModal extends Component {
   render() {
     const { open } = this.state;
     return (
-      <div>
+      <React.Fragment>
         <Button
           variant="fab"
           color="primary"
@@ -47,15 +47,13 @@ class EventModal extends Component {
         <Modal
           aria-labelledby="Add Event Modal"
           open={open}
-          onClose={this.handleClose}>
-
-          <div className={this.props.classes.paper}>
+          onClose={this.handleClose}
+        >
+          <div className="paper">
             <EventForm />
           </div>
-
         </Modal>
-
-      </div>
+      </React.Fragment>
     );
   }
 }

@@ -10,7 +10,7 @@ class Account extends Component {
 
   render() {
     return (
-      <div />
+      <React.Fragment />
     );
   }
 }

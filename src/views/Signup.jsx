@@ -24,14 +24,14 @@ class Signup extends Component {
   render() {
     const { redirect } = this.state;
     return (
-      <div>
+      <React.Fragment>
         <SignupForm
           onSignup={this.onSignup}
           onFailedSignup={this.onFailedSignup}
         />
 
         { redirect ? <Redirect to="/login" /> : null }
-      </div>
+      </React.Fragment>
     );
   }
 }
