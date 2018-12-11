@@ -18,11 +18,12 @@ class EventForm extends Component {
       name: '',
       selectedOrganization: null,
       organizations: [],
+      organizationName: '',
     };
   }
 
   componentDidMount() {
-    this.fetchOrganizations();
+    // this.fetchOrganizations();
   }
 
   handleChange = prop => (event) => {
@@ -61,8 +62,19 @@ class EventForm extends Component {
     }
   }
 
-  async fetchOrganizations() {
-    const organizations = await DataFetcher.fetchData('organizations', null);
+  searchOrganization = (event) => {
+    this.handleChange('organizationName')(event);
+    // avoid to get value from state, since state is asynchronous
+    const organizationName = event.target.value;
+    if (organizationName) {
+      this.fetchOrganizations(organizationName);
+    } else {
+      this.setState({ organizations: [] });
+    }
+  }
+
+  async fetchOrganizations(name) {
+    const organizations = await DataFetcher.fetchData('organizations/searchByName', name);
     this.setState({ organizations });
   }
 
@@ -88,7 +100,7 @@ class EventForm extends Component {
   }
 
   render() {
-    const { name } = this.state;
+    const { name, organizationName } = this.state;
     return (
       <form noValidate autoComplete="on">
         <FormGroup>
@@ -98,6 +110,13 @@ class EventForm extends Component {
             label="EventName"
             value={name}
             onChange={this.handleChange('name')}
+          />
+
+          <TextField
+            id="organization"
+            label="OrganizationName"
+            value={organizationName}
+            onChange={this.searchOrganization}
           />
 
           { this.renderOrganizationRadioGroup() }
