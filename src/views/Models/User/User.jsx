@@ -1,33 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import loadModelData from '../ModelLoader';
 
-class User extends Component {
-  constructor(props) {
-    super(props);
-    const { fullName, email } = props.data;
-    this.state = {
-      fullName,
-      email,
-    };
-  }
-
-
-  render() {
-    const { fullName, email } = this.state;
-    return (
-      <React.Fragment>
-        <h1>
-          { fullName }
-        </h1>
-
-        <h2>
-          { email }
-        </h2>
-      </React.Fragment>
-    );
-  }
+function User(props) {
+  const { data: user } = props;
+  const { fullName, email } = user;
+  return (
+    <React.Fragment>
+      { fullName }
+      { email }
+    </React.Fragment>
+  );
 }
 
 User.propTypes = {

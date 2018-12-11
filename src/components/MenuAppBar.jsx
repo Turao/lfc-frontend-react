@@ -61,7 +61,7 @@ class MenuAppBar extends Component {
         <AppBar position="static">
           <Toolbar>
 
-            <Typography variant="title">
+            <Typography variant="h6">
               <Button component={Link} to="/">
                 { title }
               </Button>

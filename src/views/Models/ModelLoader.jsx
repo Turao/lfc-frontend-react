@@ -17,16 +17,30 @@ export default function loadModelData(WrappedComponent, endpoint) {
       this.fetchData();
     }
 
+    refresh = async () => {
+      // function to be injected into wrapped components
+      // so they can ask for a refresh
+      this.fetchData(); // just delegate to fetch
+    }
+
     async fetchData() {
       const { _id } = this.state;
       const data = await DataFetcher.fetchData(endpoint, _id);
+      console.log(data);
       this.setState({ data });
     }
+
 
     renderData() {
       const { data } = this.state;
       // delegate rendering
-      return <WrappedComponent data={data} {...this.props} />;
+      return (
+        <WrappedComponent
+          data={data}
+          refresh={this.refresh}
+          {...this.props}
+        />
+      );
     }
 
     static renderLoading() {

@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Route } from 'react-router-dom';
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import blue from '@material-ui/core/colors/blue';
 
 import { Grid } from '@material-ui/core';
-import MenuAppBar from './views/components/MenuAppBar';
+import MenuAppBar from './components/MenuAppBar';
 
-import Home from './views/Home';
-import Login from './views/Login';
-import Signup from './views/Signup';
-import Account from './views/Account';
+import Home from './views/Home/Home';
+import Login from './views/Login/Login';
+import Signup from './views/Signup/Signup';
+import Account from './views/Account/Account';
 
 import Events from './views/Models/Event/Events';
 import Event from './views/Models/Event/Event';

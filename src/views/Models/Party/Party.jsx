@@ -1,31 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import loadModelData from '../ModelLoader';
 
-class Party extends Component {
-  constructor(props) {
-    super(props);
-    const { something } = props.data;
-    this.state = {
-      something,
-    };
-  }
-
-
-  render() {
-    const { something } = this.state;
-    return (
-      <React.Fragment>
-        { something }
-      </React.Fragment>
-    );
-  }
+function Party(props) {
+  const { data: party } = props;
+  const { something } = party;
+  return (
+    <React.Fragment>
+    </React.Fragment>
+  );
 }
 
 Party.propTypes = {
   data: PropTypes.shape({
-    something: PropTypes.string.isRequired,
   }).isRequired,
 };
 

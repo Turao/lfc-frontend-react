@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import SignupForm from './components/Signup/SignupForm';
+import SignupForm from './SignupForm';
 
 
 class Signup extends Component {

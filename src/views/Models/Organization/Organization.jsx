@@ -1,26 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import loadModelData from '../ModelLoader';
 
-class Organization extends Component {
-  constructor(props) {
-    super(props);
-    const { name } = props.data;
-    this.state = {
-      name,
-    };
-  }
-
-
-  render() {
-    const { name } = this.state;
-    return (
-      <h1>
-        { name }
-      </h1>
-    );
-  }
+function Organization(props) {
+  const { data: organization } = props;
+  const { name } = organization;
+  return (
+    <React.Fragment>
+      { name }
+    </React.Fragment>
+  );
 }
 
 Organization.propTypes = {

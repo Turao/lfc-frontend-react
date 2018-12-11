@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-
 import FormGroup from '@material-ui/core/FormGroup';
 
 // Name Input
 import TextField from '@material-ui/core/TextField';
-
+// Radio Buttons
+import { RadioGroup, FormControlLabel, Radio } from '@material-ui/core';
 // Submit Button
 import Button from '@material-ui/core/Button';
 
@@ -25,20 +25,20 @@ class EventForm extends Component {
     this.fetchOrganizations();
   }
 
-  static onSuccess() {
-    console.log('event created!');
-  }
-
-  static onFailure() {
-    console.log('coulnt create the event');
+  handleChange = prop => (event) => {
+    this.setState({
+      [prop]: event.target.value,
+    });
   }
 
   handleSubmit = async () => {
     const { name, selectedOrganization } = this.state;
+    const { onSuccess, onFailure } = this.props;
+
     const data = {
       event: {
         name,
-        organization: selectedOrganization,
+        organization: { _id: selectedOrganization },
       },
     };
 
@@ -55,9 +55,9 @@ class EventForm extends Component {
     });
 
     if (response.ok) {
-      this.onSuccess();
+      onSuccess();
     } else {
-      this.onFailure();
+      onFailure();
     }
   }
 
@@ -66,10 +66,25 @@ class EventForm extends Component {
     this.setState({ organizations });
   }
 
-  handleChange(prop, event) {
-    this.setState({
-      [prop]: event.target.value,
-    });
+  renderOrganizationRadioGroup() {
+    const { organizations, selectedOrganization } = this.state;
+    return (
+      <RadioGroup
+        aria-label="Organization"
+        name="organizationRadioButton"
+        value={selectedOrganization}
+        onChange={this.handleChange('selectedOrganization')}
+      >
+        {organizations.map(organization => (
+          <FormControlLabel
+            // eslint-disable-next-line no-underscore-dangle
+            value={organization._id}
+            control={<Radio />}
+            label={organization.name}
+          />
+        ))}
+      </RadioGroup>
+    );
   }
 
   render() {
@@ -84,6 +99,8 @@ class EventForm extends Component {
             value={name}
             onChange={this.handleChange('name')}
           />
+
+          { this.renderOrganizationRadioGroup() }
 
           <Button onClick={this.handleSubmit}> Create Event </Button>
 

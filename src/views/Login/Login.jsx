@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
 // Normal Login Strategy
-import LoginForm from './components/Login/LoginForm';
+import LoginForm from './LoginForm';
 
 
 class Login extends Component {

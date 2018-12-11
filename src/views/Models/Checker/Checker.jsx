@@ -1,38 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import loadModelData from '../ModelLoader';
 
-class Checker extends Component {
-  constructor(props) {
-    super(props);
-    const { fullName, email } = props.data;
-
-    this.state = {
-      fullName,
-      email,
-    };
-  }
-
-
-  render() {
-    const { fullName, email } = this.state;
-    return (
-      <React.Fragment>
-        <h1>
-          { fullName }
-        </h1>
-
-        <p>
-          { email }
-        </p>
-      </React.Fragment>
-    );
-  }
+function Checker(props) {
+  const { data: checker } = props;
+  const { fullName, email } = checker;
+  return (
+    <React.Fragment>
+      <h1>
+        { fullName }
+      </h1>
+      { email }
+    </React.Fragment>
+  );
 }
 
 Checker.propTypes = {
   data: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
     fullName: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
   }).isRequired,

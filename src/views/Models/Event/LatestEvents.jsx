@@ -10,9 +10,7 @@ import { CardContent, Grid, Typography } from '@material-ui/core';
 class LatestEvents extends Component {
   constructor(props) {
     super(props);
-    const { events } = props;
     this.state = {
-      events: this.toCardMetadata(events),
       redirectTo: null,
     };
   }
@@ -33,10 +31,12 @@ class LatestEvents extends Component {
   }
 
   render() {
-    const { events, redirectTo } = this.state;
+    let { events } = this.props;
+    events = this.toCardMetadata(events);
+    const { redirectTo } = this.state;
 
     return (
-      <Grid container direction="col">
+      <Grid container>
 
         {events.map(event => (
           <Card onClick={() => event.onClick(event)}>
@@ -64,7 +64,7 @@ class LatestEvents extends Component {
 }
 
 LatestEvents.propTypes = {
-  events: PropTypes.arrayOf(Event.proptypes).isRequired,
+  events: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default LatestEvents;
