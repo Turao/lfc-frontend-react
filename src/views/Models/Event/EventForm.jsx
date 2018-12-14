@@ -3,12 +3,18 @@ import FormGroup from '@material-ui/core/FormGroup';
 
 // Name Input
 import TextField from '@material-ui/core/TextField';
-// Radio Buttons
-import { RadioGroup, FormControlLabel, Radio } from '@material-ui/core';
+
+// Organization and User selection
+import {
+  RadioGroup, FormControlLabel, Radio,
+  List, ListItem, ListItemText, Chip,
+} from '@material-ui/core';
+
 // Submit Button
 import Button from '@material-ui/core/Button';
 
 import DataFetcher from '../../../dataFetcher';
+import ListWithChips from '../../../components/ListWithChips';
 
 
 class EventForm extends Component {
@@ -16,14 +22,15 @@ class EventForm extends Component {
     super(props);
     this.state = {
       name: '',
-      selectedOrganization: null,
-      organizations: [],
-      organizationName: '',
-    };
-  }
 
-  componentDidMount() {
-    // this.fetchOrganizations();
+      organizationName: '',
+      organizations: [],
+      selectedOrganizations: null,
+
+      username: '',
+      users: [],
+      selectedUsers: null,
+    };
   }
 
   handleChange = prop => (event) => {
@@ -32,14 +39,25 @@ class EventForm extends Component {
     });
   }
 
-  handleSubmit = async () => {
-    const { name, selectedOrganization } = this.state;
+  update = prop => (value) => {
+    this.setState({
+      [prop]: value,
+    });
+  }
+
+  handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const { name, selectedOrganizations, selectedUsers } = this.state;
     const { onSuccess, onFailure } = this.props;
 
     const data = {
       event: {
         name,
-        organization: { _id: selectedOrganization },
+        // eslint-disable-next-line no-underscore-dangle
+        organizations: selectedOrganizations.map(organization => ({ _id: organization._id })),
+        // eslint-disable-next-line no-underscore-dangle
+        moderators: selectedUsers.map(user => ({ _id: user._id })),
       },
     };
 
@@ -73,57 +91,80 @@ class EventForm extends Component {
     }
   }
 
+  searchUser = (event) => {
+    this.handleChange('username')(event);
+    // avoid to get value from state, since state is asynchronous
+    const username = event.target.value;
+    if (username) {
+      this.fetchUsers(username);
+    } else {
+      this.setState({ users: [] });
+    }
+  }
+
   async fetchOrganizations(name) {
-    const organizations = await DataFetcher.fetchData('organizations/searchByName', name);
+    const { organizations } = await DataFetcher.fetchData('organizations/searchByName', name);
     this.setState({ organizations });
   }
 
-  renderOrganizationRadioGroup() {
-    const { organizations, selectedOrganization } = this.state;
-    return (
-      <RadioGroup
-        aria-label="Organization"
-        name="organizationRadioButton"
-        value={selectedOrganization}
-        onChange={this.handleChange('selectedOrganization')}
-      >
-        {organizations.map(organization => (
-          <FormControlLabel
-            // eslint-disable-next-line no-underscore-dangle
-            value={organization._id}
-            control={<Radio />}
-            label={organization.name}
-          />
-        ))}
-      </RadioGroup>
-    );
+  async fetchUsers(name) {
+    const { users } = await DataFetcher.fetchData('users/searchByName', name);
+    this.setState({ users });
   }
 
   render() {
-    const { name, organizationName } = this.state;
+    const {
+      name, organizationName, username,
+      organizations, selectedOrganizations,
+      users, selectedUsers,
+    } = this.state;
+
     return (
-      <form noValidate autoComplete="on">
+      <form
+        noValidate
+        autoComplete="on"
+      >
         <FormGroup>
 
           <TextField
             id="name"
-            label="EventName"
+            label="Event Name"
+            placeholder="Event Name"
             value={name}
             onChange={this.handleChange('name')}
           />
 
           <TextField
             id="organization"
-            label="OrganizationName"
+            label="Organization Name"
+            placeholder="Organization Name"
             value={organizationName}
             onChange={this.searchOrganization}
           />
+          <ListWithChips
+            items={organizations}
+            itemLabel="name"
+            onChange={this.update('selectedOrganizations')}
+          />
 
-          { this.renderOrganizationRadioGroup() }
+          <TextField
+            id="user"
+            label="Username"
+            placeholder="Username"
+            value={username}
+            onChange={this.searchUser}
+          />
+          <ListWithChips
+            items={users}
+            itemLabel="name"
+            onChange={this.update('selectedUsers')}
+          />
 
           <Button onClick={this.handleSubmit}> Create Event </Button>
 
         </FormGroup>
+
+
       </form>
     );
   }

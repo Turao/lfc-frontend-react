@@ -5,16 +5,16 @@ import PropTypes from 'prop-types';
 import loadModelData from '../ModelLoader';
 
 
-function Checkers(props) {
-  const { data: checkers } = props;
+function Users(props) {
+  const { users } = props;
   return (
     <React.Fragment>
     </React.Fragment>
   );
 }
 
-Checkers.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+Users.propTypes = {
+  users: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default loadModelData(Checkers, 'checkers');
+export default loadModelData(Users, 'users');

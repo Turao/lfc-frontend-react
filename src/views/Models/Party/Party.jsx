@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import loadModelData from '../ModelLoader';
 
 function Party(props) {
-  const { data: party } = props;
+  const { party } = props;
   const { something } = party;
   return (
     <React.Fragment>
@@ -13,7 +13,7 @@ function Party(props) {
 }
 
 Party.propTypes = {
-  data: PropTypes.shape({
+  party: PropTypes.shape({
   }).isRequired,
 };
 

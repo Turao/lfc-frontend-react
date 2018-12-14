@@ -14,18 +14,15 @@ import Account from './views/Account/Account';
 
 import Events from './views/Models/Event/Events';
 import Event from './views/Models/Event/Event';
+import NewEvent from './views/Models/Event/NewEvent';
 
 import User from './views/Models/User/User';
+import Users from './views/Models/User/Users';
 
 // debug only
-import Checker from './views/Models/Checker/Checker';
-import Checkers from './views/Models/Checker/Checkers';
 
 import FactCheck from './views/Models/FactCheck/FactCheck';
 import FactChecks from './views/Models/FactCheck/FactChecks';
-
-import Moderator from './views/Models/Moderator/Moderator';
-import Moderators from './views/Models/Moderator/Moderators';
 
 import Organization from './views/Models/Organization/Organization';
 import Organizations from './views/Models/Organization/Organizations';
@@ -64,41 +61,37 @@ function App() {
 
         <Route exact path="/" component={Home} />
 
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
 
-        <Route path="/me" component={Account} />
+        <Route exact path="/me" component={Account} />
 
-        <Route path="/events" component={Events} />
-        <Route path="/event/:id" component={Event} />
+        <Route exact path="/events" component={Events} />
+        <Route exact path="/events/new" component={NewEvent} />
+        <Route exact path="/event/:id" component={Event} />
 
-        <Route path="/user/:id" component={User} />
+        <Route exact path="/user/:id" component={User} />
+        <Route exact path="/users/" component={Users} />
 
 
         {/* debug only */}
-        <Route path="/checkers/" component={Checkers} />
-        <Route path="/checker/:id" component={Checker} />
+        <Route exact path="/factchecks/" component={FactChecks} />
+        <Route exact path="/factcheck/:id" component={FactCheck} />
 
-        <Route path="/factchecks/" component={FactChecks} />
-        <Route path="/factcheck/:id" component={FactCheck} />
+        <Route exact path="/organizations/" component={Organizations} />
+        <Route exact path="/organization/:id" component={Organization} />
 
-        <Route path="/moderators/" component={Moderators} />
-        <Route path="/moderator/:id" component={Moderator} />
+        <Route exact path="/parties/" component={Parties} />
+        <Route exact path="/party/:id" component={Party} />
 
-        <Route path="/organizations/" component={Organizations} />
-        <Route path="/organization/:id" component={Organization} />
+        <Route exact path="/politicians/" component={Politicians} />
+        <Route exact path="/politician/:id" component={Politician} />
 
-        <Route path="/parties/" component={Parties} />
-        <Route path="/party/:id" component={Party} />
+        <Route exact path="/sources/" component={Sources} />
+        <Route exact path="/source/:id" component={Source} />
 
-        <Route path="/politicians/" component={Politicians} />
-        <Route path="/politician/:id" component={Politician} />
-
-        <Route path="/sources/" component={Sources} />
-        <Route path="/source/:id" component={Source} />
-
-        <Route path="/statements/" component={Statements} />
-        <Route path="/statement/:id" component={Statement} />
+        <Route exact path="/statements/" component={Statements} />
+        <Route exact path="/statement/:id" component={Statement} />
 
       </Grid>
 

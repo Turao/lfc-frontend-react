@@ -13,10 +13,8 @@ class Home extends Component {
   render() {
     return (
       <React.Fragment>
-        <Button component={Link} to="/checkers"> checkers </Button>
         <Button component={Link} to="/events"> events </Button>
         <Button component={Link} to="/factChecks"> factChecks </Button>
-        <Button component={Link} to="/moderators"> moderators </Button>
         <Button component={Link} to="/organizations"> organizations </Button>
         <Button component={Link} to="/parties"> parties </Button>
         <Button component={Link} to="/politicians"> politicians </Button>

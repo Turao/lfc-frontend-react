@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import loadModelData from '../ModelLoader';
 
 function Politician(props) {
-  const { data: politician } = props;
+  const { politician } = props;
   const { something } = politician;
   return (
     <React.Fragment>
@@ -13,7 +13,7 @@ function Politician(props) {
 }
 
 Politician.propTypes = {
-  data: PropTypes.shape({
+  politician: PropTypes.shape({
   }).isRequired,
 };
 

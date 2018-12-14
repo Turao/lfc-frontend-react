@@ -6,7 +6,7 @@ import loadModelData from '../ModelLoader';
 
 
 function Parties(props) {
-  const { data: parties } = props;
+  const { parties } = props;
   return (
     <React.Fragment>
     </React.Fragment>
@@ -14,7 +14,7 @@ function Parties(props) {
 }
 
 Parties.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  parties: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default loadModelData(Parties, 'parties');

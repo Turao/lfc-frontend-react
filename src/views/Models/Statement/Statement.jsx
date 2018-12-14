@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import loadModelData from '../ModelLoader';
 
 function Statement(props) {
-  const { data: statement } = props;
+  const { statement } = props;
   const { something } = statement;
   return (
     <React.Fragment>
@@ -13,7 +13,7 @@ function Statement(props) {
 }
 
 Statement.propTypes = {
-  data: PropTypes.shape({
+  statement: PropTypes.shape({
   }).isRequired,
 };
 

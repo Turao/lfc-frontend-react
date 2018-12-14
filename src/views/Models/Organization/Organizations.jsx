@@ -6,7 +6,7 @@ import loadModelData from '../ModelLoader';
 
 
 function Organizations(props) {
-  const { data: organizations } = props;
+  const { organizations } = props;
   return (
     <React.Fragment>
       <OrganizationList organizations={organizations} />
@@ -15,7 +15,7 @@ function Organizations(props) {
 }
 
 Organizations.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  organizations: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default loadModelData(Organizations, 'organizations');

@@ -6,7 +6,7 @@ import loadModelData from '../ModelLoader';
 
 
 function FactChecks(props) {
-  const { data: factChecks } = props;
+  const { factChecks } = props;
   return (
     <React.Fragment>
     </React.Fragment>
@@ -14,7 +14,7 @@ function FactChecks(props) {
 }
 
 FactChecks.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  factChecks: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default loadModelData(FactChecks, 'factChecks');

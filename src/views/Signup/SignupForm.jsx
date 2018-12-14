@@ -26,17 +26,17 @@ class SignupForm extends Component {
       showPassword: false,
       email: '',
       password: '',
-      fullName: '',
+      name: '',
     };
   }
 
   handleSubmit = async () => {
-    const { fullName, email, password } = this.state;
+    const { name, email, password } = this.state;
     const { onSignup, onFailedSignup } = this.props;
 
     const data = {
       user: {
-        fullName,
+        name,
         email,
         password,
       },
@@ -72,7 +72,7 @@ class SignupForm extends Component {
   }
 
   render() {
-    const { fullName, email } = this.state;
+    const { name, email } = this.state;
     const { password, showPassword } = this.state;
 
     return (
@@ -80,10 +80,10 @@ class SignupForm extends Component {
         <FormGroup>
 
           <TextField
-            id="fullName"
-            label="Full Name"
-            value={fullName}
-            onChange={this.handleChange('fullName')}
+            id="name"
+            label="Name"
+            value={name}
+            onChange={this.handleChange('name')}
           />
 
           <TextField

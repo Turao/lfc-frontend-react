@@ -6,7 +6,7 @@ import loadModelData from '../ModelLoader';
 
 
 function Statements(props) {
-  const { data: statements } = props;
+  const { statements } = props;
   return (
     <React.Fragment>
     </React.Fragment>
@@ -14,7 +14,7 @@ function Statements(props) {
 }
 
 Statements.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  statements: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default loadModelData(Statements, 'statements');

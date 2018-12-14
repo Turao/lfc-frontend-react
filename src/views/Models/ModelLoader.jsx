@@ -26,7 +26,6 @@ export default function loadModelData(WrappedComponent, endpoint) {
     async fetchData() {
       const { _id } = this.state;
       const data = await DataFetcher.fetchData(endpoint, _id);
-      console.log(data);
       this.setState({ data });
     }
 
@@ -36,7 +35,7 @@ export default function loadModelData(WrappedComponent, endpoint) {
       // delegate rendering
       return (
         <WrappedComponent
-          data={data}
+          {...data} // unpack data object
           refresh={this.refresh}
           {...this.props}
         />

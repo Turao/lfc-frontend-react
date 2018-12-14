@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import loadModelData from '../ModelLoader';
 
 function Organization(props) {
-  const { data: organization } = props;
+  const { organization } = props;
   const { name } = organization;
   return (
     <React.Fragment>
@@ -14,7 +14,7 @@ function Organization(props) {
 }
 
 Organization.propTypes = {
-  data: PropTypes.shape({
+  organization: PropTypes.shape({
     name: PropTypes.string.isRequired,
   }).isRequired,
 };

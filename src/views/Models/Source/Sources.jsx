@@ -6,7 +6,7 @@ import loadModelData from '../ModelLoader';
 
 
 function Sources(props) {
-  const { data: sources } = props;
+  const { sources } = props;
   return (
     <React.Fragment>
     </React.Fragment>
@@ -14,7 +14,7 @@ function Sources(props) {
 }
 
 Sources.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  sources: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default loadModelData(Sources, 'source');

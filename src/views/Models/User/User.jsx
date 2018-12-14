@@ -4,19 +4,19 @@ import PropTypes from 'prop-types';
 import loadModelData from '../ModelLoader';
 
 function User(props) {
-  const { data: user } = props;
-  const { fullName, email } = user;
+  const { user } = props;
+  const { name, email } = user;
   return (
     <React.Fragment>
-      { fullName }
+      { name }
       { email }
     </React.Fragment>
   );
 }
 
 User.propTypes = {
-  data: PropTypes.shape({
-    fullName: PropTypes.string.isRequired,
+  user: PropTypes.shape({
+    name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
   }).isRequired,
 };

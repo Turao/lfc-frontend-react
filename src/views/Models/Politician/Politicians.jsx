@@ -6,7 +6,7 @@ import loadModelData from '../ModelLoader';
 
 
 function Politicians(props) {
-  const { data: politicians } = props;
+  const { politicians } = props;
   return (
     <React.Fragment>
     </React.Fragment>
@@ -14,7 +14,7 @@ function Politicians(props) {
 }
 
 Politicians.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  politicians: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default loadModelData(Politicians, 'politicians');
