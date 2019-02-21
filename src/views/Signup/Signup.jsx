@@ -8,13 +8,13 @@ class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      redirect: false,
+      redirectToLogin: false,
     };
   }
 
   onSignup = () => {
     console.log('succesfully signed up');
-    this.setState({ redirect: true });
+    this.setState({ redirectToLogin: true });
   }
 
   onFailedSignup = () => {
@@ -22,7 +22,7 @@ class Signup extends Component {
   }
 
   render() {
-    const { redirect } = this.state;
+    const { redirectToLogin } = this.state;
     return (
       <React.Fragment>
         <SignupForm
@@ -30,7 +30,7 @@ class Signup extends Component {
           onFailedSignup={this.onFailedSignup}
         />
 
-        { redirect ? <Redirect to="/login" /> : null }
+        { redirectToLogin ? <Redirect to="/login" /> : null }
       </React.Fragment>
     );
   }

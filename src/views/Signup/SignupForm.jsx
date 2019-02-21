@@ -24,21 +24,29 @@ class SignupForm extends Component {
     super(props);
     this.state = {
       showPassword: false,
-      email: '',
+      username: '',
       password: '',
-      name: '',
+      email: '',
+      firstName: '',
+      lastName: '',
     };
   }
 
   handleSubmit = async () => {
-    const { name, email, password } = this.state;
+    const {
+      username, email,
+      firstName, lastName,
+      password,
+    } = this.state;
     const { onSignup, onFailedSignup } = this.props;
 
     const data = {
       user: {
-        name,
+        username,
         email,
         password,
+        firstName,
+        lastName,
       },
     };
 
@@ -72,18 +80,21 @@ class SignupForm extends Component {
   }
 
   render() {
-    const { name, email } = this.state;
-    const { password, showPassword } = this.state;
+    const {
+      username, email,
+      firstName, lastName,
+      password, showPassword,
+    } = this.state;
 
     return (
       <form noValidate autoComplete="off">
         <FormGroup>
 
           <TextField
-            id="name"
-            label="Name"
-            value={name}
-            onChange={this.handleChange('name')}
+            id="username"
+            label="Userame"
+            value={username}
+            onChange={this.handleChange('username')}
           />
 
           <TextField
@@ -92,6 +103,20 @@ class SignupForm extends Component {
             // className={classes.textField}
             value={email}
             onChange={this.handleChange('email')}
+          />
+
+          <TextField
+            id="firstName"
+            label="First Name"
+            value={firstName}
+            onChange={this.handleChange('firstName')}
+          />
+
+          <TextField
+            id="lastName"
+            label="Last Name"
+            value={lastName}
+            onChange={this.handleChange('lastName')}
           />
 
           <FormControl>
