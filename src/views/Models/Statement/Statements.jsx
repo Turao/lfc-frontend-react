@@ -17,7 +17,7 @@ class Statements extends Component {
     this.fetchStatementsData();
   }
 
-  async fetchStatementskData() {
+  async fetchStatementsData() {
     const statements = await DataFetcher.fetchData('statements');
     this.setState({ statements });
   }

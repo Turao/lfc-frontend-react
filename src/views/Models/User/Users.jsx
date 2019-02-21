@@ -17,7 +17,7 @@ class Users extends Component {
     this.fetchUsersData();
   }
 
-  async fetchUserskData() {
+  async fetchUsersData() {
     const users = await DataFetcher.fetchData('users');
     this.setState({ users });
   }
