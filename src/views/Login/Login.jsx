@@ -19,7 +19,7 @@ class Login extends Component {
     console.log('user token:', token);
     sessionStorage.setItem('userToken', token);
     // eslint-disable-next-line no-underscore-dangle
-    sessionStorage.setItem('user.id', user._id);
+    sessionStorage.setItem('user.id', user.id);
     sessionStorage.setItem('logged', true);
     this.setState({ logged: true });
   }

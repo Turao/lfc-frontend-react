@@ -5,5 +5,5 @@ import EventPropType from '../Event/proptype';
 export default PropTypes.shape({
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  email: PropTypes.arrayOf(EventPropType),
+  event: PropTypes.arrayOf(EventPropType),
 });

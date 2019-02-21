@@ -18,7 +18,7 @@ class OrganizationInfo extends Component {
       <Card>
         <CardContent>
           <Typography variant="h5">
-            { organization.organizationname }
+            { organization.name }
           </Typography>
         </CardContent>
       </Card>

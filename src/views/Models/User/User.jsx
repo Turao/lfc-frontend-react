@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import DataFetcher from '../../../dataFetcher';
-import UserPropType from './proptype';
 import UserInfo from './UserInfo';
 
 

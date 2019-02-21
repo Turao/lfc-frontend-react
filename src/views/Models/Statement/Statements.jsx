@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import DataFetcher from '../../../dataFetcher';
-import PropTypes from 'prop-types';
 import StatementInfo from './StatementInfo';
 
 class Statements extends Component {

@@ -18,7 +18,10 @@ class PartyInfo extends Component {
       <Card>
         <CardContent>
           <Typography variant="h5">
-            { party.partyname }
+            { party.abbreviation }
+          </Typography>
+          <Typography>
+            { party.name }
           </Typography>
         </CardContent>
       </Card>

@@ -33,11 +33,6 @@ class LoginForm extends Component {
   handleSubmit = async () => {
     const { email, password } = this.state;
     const { onLogin, onFailedLogin } = this.props;
-    console.log(onLogin, onFailedLogin);
-
-    console.log('logging in...');
-    console.log('email', email);
-    console.log('password', password);
 
     const data = {
       user: {
