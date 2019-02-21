@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-
-import Grid from '@material-ui/core/Grid';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
 
 import DataFetcher from '../../../dataFetcher';
-import EventList from './EventList';
-
+import EventInfo from './EventInfo';
 
 class Events extends Component {
   constructor(props) {
@@ -35,29 +29,12 @@ class Events extends Component {
 
   renderLatestEvents() {
     const { latestEvents } = this.state;
-    return (
-      <Grid item xs={3}>
-        <EventList title="Latest Events" events={latestEvents} />
-      </Grid>
-    );
+    return latestEvents.map(event => <EventInfo event={event} key={event.id} />);
   }
 
   renderAllEvents() {
     const { allEvents } = this.state;
-    return (
-      <Grid container item xs={4}>
-        <EventList title="All Events" events={allEvents} />
-
-        <Fab
-          color="primary"
-          component={Link}
-          to="/events/new"
-        >
-          <AddIcon />
-        </Fab>
-
-      </Grid>
-    );
+    return allEvents.map(event => <EventInfo event={event} key={event.id} />);
   }
 
   render() {

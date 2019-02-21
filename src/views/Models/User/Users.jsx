@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 import DataFetcher from '../../../dataFetcher';
-import UserPropType from './proptype';
-
+import UserInfo from './UserInfo';
 
 class Users extends Component {
   constructor(props) {
@@ -24,7 +22,13 @@ class Users extends Component {
 
   renderUsers() {
     const { users } = this.state;
-    return null;
+    return (
+      <React.Fragment>
+        {
+          users.map(user => <UserInfo user={user} key={user.id} />)
+        }
+      </React.Fragment>
+    );
   }
 
   render() {
@@ -32,9 +36,5 @@ class Users extends Component {
     return users ? this.renderUsers() : null;
   }
 }
-
-Users.propTypes = {
-  users: PropTypes.arrayOf(UserPropType),
-};
 
 export default Users;

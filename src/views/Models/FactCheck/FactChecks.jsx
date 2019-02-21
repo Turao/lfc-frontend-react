@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 import DataFetcher from '../../../dataFetcher';
-import FactCheckPropType from './proptype';
+import FactCheckInfo from './FactCheckInfo';
 
 
 class FactChecks extends Component {
@@ -24,7 +23,11 @@ class FactChecks extends Component {
 
   renderFactChecks() {
     const { factchecks } = this.state;
-    return null;
+    return (
+      factchecks.map(factcheck => (
+        <FactCheckInfo factcheck={factcheck} key={factcheck.id} />
+      ))
+    );
   }
 
   render() {
@@ -32,9 +35,5 @@ class FactChecks extends Component {
     return factchecks ? this.renderFactChecks() : null;
   }
 }
-
-FactChecks.propTypes = {
-  factchecks: PropTypes.arrayOf(FactCheckPropType),
-};
 
 export default FactChecks;

@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import DataFetcher from '../../../dataFetcher';
-import StatementPropType from './proptype';
-
+import StatementInfo from './StatementInfo';
 
 class Statement extends Component {
   constructor(props) {
@@ -26,7 +25,7 @@ class Statement extends Component {
 
   renderStatement() {
     const { statement } = this.state;
-    return null;
+    return <StatementInfo statement={statement} />;
   }
 
   render() {
@@ -36,7 +35,11 @@ class Statement extends Component {
 }
 
 Statement.propTypes = {
-  statement: StatementPropType,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.number
+    })
+  }),
 };
 
 export default Statement;

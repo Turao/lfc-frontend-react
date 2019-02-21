@@ -1,16 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
-import Grid from '@material-ui/core/Grid';
-import { List, ListSubheader, Typography } from '@material-ui/core';
-import Chip from '@material-ui/core/Chip';
-
-import Button from '@material-ui/core/Button';
-
-import NewStatement from '../Statement/NewStatement';
 import DataFetcher from '../../../dataFetcher';
-import EventPropType from './proptype';
-
+import EventInfo from './EventInfo';
 
 class Event extends Component {
   constructor(props) {
@@ -33,19 +24,7 @@ class Event extends Component {
 
   renderEvent() {
     const { event } = this.state;
-    return (
-      <Grid>
-        <Typography variant="h2">
-          { event.name }
-        </Typography>
-  
-        <List subheader={<ListSubheader>Moderators</ListSubheader>}>
-          {event.moderators.map(m => (
-            <Chip label={m.name} />))}
-        </List>
-  
-      </Grid>
-    );
+    return <EventInfo event={event} />;
   }
 
   render() {
@@ -53,10 +32,5 @@ class Event extends Component {
     return event ? this.renderEvent() : null;
   }
 }
-
-Event.propTypes = {
-  event: EventPropType,
-  // refresh: proptypes.refresh.isRequired,
-};
 
 export default Event;

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 import DataFetcher from '../../../dataFetcher';
-import OrganizationPropType from './proptype';
-
+import OrganizationInfo from './OrganizationInfo';
 
 class Organization extends Component {
   constructor(props) {
@@ -26,7 +24,7 @@ class Organization extends Component {
 
   renderOrganization() {
     const { organization } = this.state;
-    return null;
+    return <OrganizationInfo organization={organization} />;
   }
 
   render() {
@@ -34,9 +32,5 @@ class Organization extends Component {
     return organization ? this.renderOrganization() : null;
   }
 }
-
-Organization.propTypes = {
-  organization: OrganizationPropType,
-};
 
 export default Organization;

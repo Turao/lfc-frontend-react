@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 import DataFetcher from '../../../dataFetcher';
-import StatementPropType from './proptype';
-
+import PropTypes from 'prop-types';
+import StatementInfo from './StatementInfo';
 
 class Statements extends Component {
   constructor(props) {
@@ -24,7 +23,13 @@ class Statements extends Component {
 
   renderStatements() {
     const { statements } = this.state;
-    return null;
+    return (
+      <React.Fragment>
+        {
+          statements.map(statement => <StatementInfo statement={statement} key={statement.id} />)
+        }
+      </React.Fragment>
+    );
   }
 
   render() {
@@ -32,9 +37,5 @@ class Statements extends Component {
     return statements ? this.renderStatements() : null;
   }
 }
-
-Statements.propTypes = {
-  statements: PropTypes.arrayOf(StatementPropType),
-};
 
 export default Statements;

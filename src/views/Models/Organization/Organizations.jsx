@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 import DataFetcher from '../../../dataFetcher';
-import OrganizationPropType from './proptype';
+import OrganizationInfo from './OrganizationInfo';
 
 
 class Organizations extends Component {
@@ -24,7 +23,11 @@ class Organizations extends Component {
 
   renderOrganizations() {
     const { organizations } = this.state;
-    return null;
+    return (
+      organizations.map(organization => (
+        <OrganizationInfo organization={organization} key={organization.id} />
+      ))
+    );
   }
 
   render() {
@@ -32,9 +35,5 @@ class Organizations extends Component {
     return organizations ? this.renderOrganizations() : null;
   }
 }
-
-Organizations.propTypes = {
-  organizations: PropTypes.arrayOf(OrganizationPropType),
-};
 
 export default Organizations;

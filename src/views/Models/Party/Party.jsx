@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 import DataFetcher from '../../../dataFetcher';
-import PartyPropType from './proptype';
-
+import PartyInfo from './PartyInfo';
 
 class Party extends Component {
   constructor(props) {
@@ -26,7 +24,7 @@ class Party extends Component {
 
   renderParty() {
     const { party } = this.state;
-    return null;
+    return <PartyInfo party={party} />;
   }
 
   render() {
@@ -34,9 +32,5 @@ class Party extends Component {
     return party ? this.renderParty() : null;
   }
 }
-
-Party.propTypes = {
-  party: PartyPropType,
-};
 
 export default Party;

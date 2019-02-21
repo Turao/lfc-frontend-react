@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Card from '@material-ui/core/Card';
 
 import DataFetcher from '../../../dataFetcher';
 import UserPropType from './proptype';
-import { CardContent, Typography } from '@material-ui/core';
+import UserInfo from './UserInfo';
 
 
 class User extends Component {
@@ -29,13 +28,7 @@ class User extends Component {
   renderUser() {
     const { user } = this.state;
     return (
-      <Card>
-        <CardContent>
-          <Typography> { user.username } </Typography>
-          <Typography> { user.lastName + ' ' + user.firstName } </Typography>
-          <Typography> { user.email } </Typography>
-        </CardContent>
-      </Card>
+      <UserInfo user={user} />
     );
   }
 
@@ -46,7 +39,11 @@ class User extends Component {
 }
 
 User.propTypes = {
-  user: UserPropType,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.number
+    })
+  }),
 };
 
 export default User;

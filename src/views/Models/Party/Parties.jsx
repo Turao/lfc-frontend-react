@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 import DataFetcher from '../../../dataFetcher';
-import PartyPropType from './proptype';
-
+import PartyInfo from './PartyInfo';
 
 class Parties extends Component {
   constructor(props) {
@@ -24,7 +22,7 @@ class Parties extends Component {
 
   renderParties() {
     const { parties } = this.state;
-    return null;
+    return parties.map(party => <PartyInfo party={party} key={party.id} />);
   }
 
   render() {
@@ -32,9 +30,5 @@ class Parties extends Component {
     return parties ? this.renderParties() : null;
   }
 }
-
-Parties.propTypes = {
-  parties: PropTypes.arrayOf(PartyPropType),
-};
 
 export default Parties;
