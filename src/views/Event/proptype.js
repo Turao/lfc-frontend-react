@@ -9,5 +9,5 @@ export default PropTypes.shape({
   name: PropTypes.string.isRequired,
   organization: OrganizationPropType,
   moderators: PropTypes.arrayOf(UserPropType),
-  statement: PropTypes.arrayOf(StatementPropType),
+  statements: PropTypes.arrayOf(StatementPropType),
 });

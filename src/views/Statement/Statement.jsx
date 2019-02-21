@@ -19,7 +19,7 @@ class Statement extends Component {
 
   async fetchStatementData() {
     const { id } = this.state;
-    const statement = await DataFetcher.fetchData(`statement/${id}`);
+    const statement = await DataFetcher.getDataFromAPI(`statement/${id}`);
     this.setState({ statement });
   }
 

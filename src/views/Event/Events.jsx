@@ -18,12 +18,12 @@ class Events extends Component {
   }
 
   async fetchLatestEvents() {
-    const latestEvents = await DataFetcher.fetchData('events/latest');
+    const latestEvents = await DataFetcher.getDataFromAPI('events/latest');
     this.setState({ latestEvents });
   }
 
   async fetchAllEvents() {
-    const allEvents = await DataFetcher.fetchData('events');
+    const allEvents = await DataFetcher.getDataFromAPI('events');
     this.setState({ allEvents });
   }
 

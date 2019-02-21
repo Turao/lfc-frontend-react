@@ -17,6 +17,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 // Submit Button
 import Button from '@material-ui/core/Button';
+import DataFetcher from '../../dataFetcher';
 
 
 class SignupForm extends Component {
@@ -38,7 +39,7 @@ class SignupForm extends Component {
       firstName, lastName,
       password,
     } = this.state;
-    const { onSignup, onFailedSignup } = this.props;
+    const { onSuccess, onFailure } = this.props;
 
     const data = {
       user: {
@@ -50,21 +51,12 @@ class SignupForm extends Component {
       },
     };
 
-    console.log('signing up...', data);
-
-    const response = await fetch('http://api.localhost:3001/signup', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-
-    if (response.ok) {
-      onSignup();
-    } else {
-      onFailedSignup();
+    try {
+      const response = await DataFetcher.sendDataToAPI('signup', data);
+      const { user } = response;
+      onSuccess(user);
+    } catch (error) {
+      onFailure(error);
     }
   }
 
@@ -148,8 +140,8 @@ class SignupForm extends Component {
 }
 
 SignupForm.propTypes = {
-  onSignup: PropTypes.func.isRequired,
-  onFailedSignup: PropTypes.func.isRequired,
+  onSuccess: PropTypes.func.isRequired,
+  onFailure: PropTypes.func.isRequired,
 };
 
 export default SignupForm;

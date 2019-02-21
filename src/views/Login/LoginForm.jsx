@@ -17,6 +17,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 // Submit Button
 import Button from '@material-ui/core/Button';
+import DataFetcher from '../../dataFetcher';
 
 
 class LoginForm extends Component {
@@ -32,7 +33,7 @@ class LoginForm extends Component {
 
   handleSubmit = async () => {
     const { email, password } = this.state;
-    const { onLogin, onFailedLogin } = this.props;
+    const { onSuccess, onFailure } = this.props;
 
     const data = {
       user: {
@@ -41,24 +42,12 @@ class LoginForm extends Component {
       },
     };
 
-    const response = await fetch('http://api.localhost:3001/login', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-
-    if (response.ok) {
-      try {
-        const { token, user } = await response.json();
-        onLogin(token, user);
-      } catch (error) {
-        onFailedLogin();
-      }
-    } else {
-      onFailedLogin();
+    try {
+      const response = await DataFetcher.sendDataToAPI('login', data);
+      const { user, token } = response;
+      onSuccess(user, token);
+    } catch (error) {
+      onFailure(error);
     }
   }
 
@@ -116,8 +105,8 @@ class LoginForm extends Component {
 }
 
 LoginForm.propTypes = {
-  onLogin: PropTypes.func.isRequired,
-  onFailedLogin: PropTypes.func.isRequired,
+  onSuccess: PropTypes.func.isRequired,
+  onFailure: PropTypes.func.isRequired,
 };
 
 export default LoginForm;

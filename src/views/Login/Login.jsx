@@ -13,7 +13,7 @@ class Login extends Component {
     };
   }
 
-  onLogin = (token, user) => {
+  onSuccess = (user, token) => {
     console.log('logged in');
 
     console.log('user token:', token);
@@ -24,7 +24,7 @@ class Login extends Component {
     this.setState({ logged: true });
   }
 
-  onFailedLogin = () => {
+  onFailure = () => {
     console.log('failed to log in');
   }
 
@@ -33,8 +33,8 @@ class Login extends Component {
     return (
       <React.Fragment>
         <LoginForm
-          onLogin={this.onLogin}
-          onFailedLogin={this.onFailedLogin}
+          onSuccess={this.onSuccess}
+          onFailure={this.onFailure}
         />
 
         { logged ? <Redirect to="/" /> : null }

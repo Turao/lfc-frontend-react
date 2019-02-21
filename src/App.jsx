@@ -14,6 +14,7 @@ import Account from './views/Account/Account';
 
 import Events from './views/Event/Events';
 import Event from './views/Event/Event';
+import NewEvent from './views/Event/NewEvent';
 
 import User from './views/User/User';
 import Users from './views/User/Users';
@@ -65,6 +66,7 @@ function App() {
 
         <Route exact path="/events" component={Events} />
         <Route exact path="/event/:id" component={Event} />
+        <Route exact path="/event/new" component={NewEvent} />
 
         <Route exact path="/user/:id" component={User} />
         <Route exact path="/users/" component={Users} />

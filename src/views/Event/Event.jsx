@@ -18,7 +18,7 @@ class Event extends Component {
 
   async fetchEventData() {
     const { id } = this.state;
-    const event = await DataFetcher.fetchData(`event/${id}`);
+    const event = await DataFetcher.getDataFromAPI(`event/${id}`);
     this.setState({ event });
   }
 

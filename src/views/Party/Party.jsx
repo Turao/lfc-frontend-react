@@ -18,7 +18,7 @@ class Party extends Component {
 
   async fetchPartyData() {
     const { id } = this.state;
-    const party = await DataFetcher.fetchData(`party/${id}`);
+    const party = await DataFetcher.getDataFromAPI(`party/${id}`);
     this.setState({ party });
   }
 

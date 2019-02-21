@@ -18,7 +18,7 @@ class FactCheck extends Component {
 
   async fetchFactCheckData() {
     const { id } = this.state;
-    const factcheck = await DataFetcher.fetchData(`factcheck/${id}`);
+    const factcheck = await DataFetcher.getDataFromAPI(`factcheck/${id}`);
     this.setState({ factcheck });
   }
 

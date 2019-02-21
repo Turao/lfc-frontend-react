@@ -12,12 +12,12 @@ class Signup extends Component {
     };
   }
 
-  onSignup = () => {
+  onSuccess = () => {
     console.log('succesfully signed up');
     this.setState({ redirectToLogin: true });
   }
 
-  onFailedSignup = () => {
+  onFailure = () => {
     console.log('failed to sign up');
   }
 
@@ -26,8 +26,8 @@ class Signup extends Component {
     return (
       <React.Fragment>
         <SignupForm
-          onSignup={this.onSignup}
-          onFailedSignup={this.onFailedSignup}
+          onSuccess={this.onSuccess}
+          onFailure={this.onFailure}
         />
 
         { redirectToLogin ? <Redirect to="/login" /> : null }

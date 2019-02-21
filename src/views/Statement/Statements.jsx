@@ -16,7 +16,7 @@ class Statements extends Component {
   }
 
   async fetchStatementsData() {
-    const statements = await DataFetcher.fetchData('statements');
+    const statements = await DataFetcher.getDataFromAPI('statements');
     this.setState({ statements });
   }
 

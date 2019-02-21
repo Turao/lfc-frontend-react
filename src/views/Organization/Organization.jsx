@@ -18,7 +18,7 @@ class Organization extends Component {
 
   async fetchOrganizationData() {
     const { id } = this.state;
-    const organization = await DataFetcher.fetchData(`organization/${id}`);
+    const organization = await DataFetcher.getDataFromAPI(`organization/${id}`);
     this.setState({ organization });
   }
 

@@ -18,7 +18,7 @@ class Account extends Component {
 
   async fetchUserData() {
     const id = sessionStorage.getItem('user.id');
-    const user = await DataFetcher.fetchData(`user/${id}`);
+    const user = await DataFetcher.getDataFromAPI(`user/${id}`);
     this.setState({ user });
   }
 
