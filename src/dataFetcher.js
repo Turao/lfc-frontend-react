@@ -1,8 +1,7 @@
 const DataFetcher = {
 
-  async fetchData(endpoint, _id) {
-    let url = `http://localhost:3001/api/${endpoint}/`;
-    url = _id ? url + _id : url;
+  async fetchData(endpoint) {
+    const url = new URL(endpoint, 'http://api.localhost:3001/');
 
     const response = await fetch(url, {
       method: 'GET',
@@ -17,7 +16,9 @@ const DataFetcher = {
       const data = await response.json();
       console.log(data);
       return data;
-    } return null;
+    }
+
+    throw Error(`${response.statusText} (${response.status})`);
   },
 
 };

@@ -1,20 +1,40 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-// import CheckerList from './CheckersList';
-import loadModelData from '../ModelLoader';
+import DataFetcher from '../../../dataFetcher';
+import UserPropType from './proptype';
 
 
-function Users(props) {
-  const { users } = props;
-  return (
-    <React.Fragment>
-    </React.Fragment>
-  );
+class Users extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: null,
+    };
+  }
+
+  componentDidMount() {
+    this.fetchUsersData();
+  }
+
+  async fetchUserskData() {
+    const users = await DataFetcher.fetchData('users');
+    this.setState({ users });
+  }
+
+  renderUsers() {
+    const { users } = this.state;
+    return null;
+  }
+
+  render() {
+    const { users } = this.state;
+    return users ? this.renderUsers() : null;
+  }
 }
 
 Users.propTypes = {
-  users: PropTypes.arrayOf(PropTypes.object).isRequired,
+  users: PropTypes.arrayOf(UserPropType),
 };
 
-export default loadModelData(Users, 'users');
+export default Users;

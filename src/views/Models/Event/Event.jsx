@@ -1,40 +1,62 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Grid from '@material-ui/core/Grid';
-import { List, ListSubheader } from '@material-ui/core';
+import { List, ListSubheader, Typography } from '@material-ui/core';
 import Chip from '@material-ui/core/Chip';
 
-import loadModelData from '../ModelLoader';
+import Button from '@material-ui/core/Button';
 
-function Event(props) {
-  const { event } = props;
-  const { name, organizations, moderators } = event;
-  return (
-    <Grid>
-      <h1>
-        { name }
-      </h1>
+import NewStatement from '../Statement/NewStatement';
+import DataFetcher from '../../../dataFetcher';
+import EventPropType from './proptype';
 
-      <List subheader={<ListSubheader>Organizations</ListSubheader>}>
-        {organizations.map(o => (
-          <Chip label={o.name} />))}
-      </List>
 
-      <List subheader={<ListSubheader>Moderators</ListSubheader>}>
-        {moderators.map(m => (
-          <Chip label={m.name} />))}
-      </List>
-    </Grid>
-  );
+class Event extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: props.match.params.id,
+      event: null,
+    };
+  }
+
+  componentDidMount() {
+    this.fetchEventData();
+  }
+
+  async fetchEventData() {
+    const { id } = this.state;
+    const event = await DataFetcher.fetchData(`event/${id}`);
+    this.setState({ event });
+  }
+
+  renderEvent() {
+    const { event } = this.state;
+    return (
+      <Grid>
+        <Typography variant="h2">
+          { event.name }
+        </Typography>
+  
+        <List subheader={<ListSubheader>Moderators</ListSubheader>}>
+          {event.moderators.map(m => (
+            <Chip label={m.name} />))}
+        </List>
+  
+      </Grid>
+    );
+  }
+
+  render() {
+    const { event } = this.state;
+    return event ? this.renderEvent() : null;
+  }
 }
 
 Event.propTypes = {
-  event: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    organization: PropTypes.object.isRequired,
-  }).isRequired,
+  event: EventPropType,
+  // refresh: proptypes.refresh.isRequired,
 };
 
-export default loadModelData(Event, 'event');
+export default Event;

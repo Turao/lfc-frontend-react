@@ -13,12 +13,13 @@ class Login extends Component {
     };
   }
 
-  onLogin = (token) => {
+  onLogin = (token, user) => {
     console.log('logged in');
 
     console.log('user token:', token);
     sessionStorage.setItem('userToken', token);
-
+    // eslint-disable-next-line no-underscore-dangle
+    sessionStorage.setItem('user.id', user._id);
     sessionStorage.setItem('logged', true);
     this.setState({ logged: true });
   }

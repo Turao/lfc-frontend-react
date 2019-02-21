@@ -1,20 +1,42 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import loadModelData from '../ModelLoader';
+import DataFetcher from '../../../dataFetcher';
+import PartyPropType from './proptype';
 
-function Party(props) {
-  const { party } = props;
-  const { something } = party;
-  return (
-    <React.Fragment>
-    </React.Fragment>
-  );
+
+class Party extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: props.match.params.id,
+      party: null,
+    };
+  }
+
+  componentDidMount() {
+    this.fetchPartyData();
+  }
+
+  async fetchPartyData() {
+    const { id } = this.state;
+    const party = await DataFetcher.fetchData(`party/${id}`);
+    this.setState({ party });
+  }
+
+  renderParty() {
+    const { party } = this.state;
+    return null;
+  }
+
+  render() {
+    const { party } = this.state;
+    return party ? this.renderParty() : null;
+  }
 }
 
 Party.propTypes = {
-  party: PropTypes.shape({
-  }).isRequired,
+  party: PartyPropType,
 };
 
-export default loadModelData(Party, 'party');
+export default Party;

@@ -44,7 +44,7 @@ class SignupForm extends Component {
 
     console.log('signing up...', data);
 
-    const response = await fetch('http://localhost:3001/api/signup', {
+    const response = await fetch('http://api.localhost:3001/signup', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

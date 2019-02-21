@@ -1,20 +1,40 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-// import CheckerList from './CheckersList';
-import loadModelData from '../ModelLoader';
+import DataFetcher from '../../../dataFetcher';
+import PartyPropType from './proptype';
 
 
-function Parties(props) {
-  const { parties } = props;
-  return (
-    <React.Fragment>
-    </React.Fragment>
-  );
+class Parties extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      parties: null,
+    };
+  }
+
+  componentDidMount() {
+    this.fetchPartiesData();
+  }
+
+  async fetchPartieskData() {
+    const parties = await DataFetcher.fetchData('parties');
+    this.setState({ parties });
+  }
+
+  renderParties() {
+    const { parties } = this.state;
+    return null;
+  }
+
+  render() {
+    const { parties } = this.state;
+    return parties ? this.renderParties() : null;
+  }
 }
 
 Parties.propTypes = {
-  parties: PropTypes.arrayOf(PropTypes.object).isRequired,
+  parties: PropTypes.arrayOf(PartyPropType),
 };
 
-export default loadModelData(Parties, 'parties');
+export default Parties;

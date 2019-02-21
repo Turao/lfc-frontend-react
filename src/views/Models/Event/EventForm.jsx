@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import FormGroup from '@material-ui/core/FormGroup';
+import Grid from '@material-ui/core/Grid';
 
 // Name Input
 import TextField from '@material-ui/core/TextField';
+import IconButton from '@material-ui/core/IconButton';
+import SearchIcon from '@material-ui/icons/Search';
 
-// Organization and User selection
-import {
-  RadioGroup, FormControlLabel, Radio,
-  List, ListItem, ListItemText, Chip,
-} from '@material-ui/core';
 
 // Submit Button
 import Button from '@material-ui/core/Button';
@@ -51,6 +48,13 @@ class EventForm extends Component {
     const { name, selectedOrganizations, selectedUsers } = this.state;
     const { onSuccess, onFailure } = this.props;
 
+    if (!name || name.length === 0 
+      || !selectedOrganizations || selectedOrganizations.length === 0
+      || !selectedUsers || selectedUsers.length === 0) {
+      onFailure();
+      return;
+    }
+
     const data = {
       event: {
         name,
@@ -80,10 +84,8 @@ class EventForm extends Component {
     }
   }
 
-  searchOrganization = (event) => {
-    this.handleChange('organizationName')(event);
-    // avoid to get value from state, since state is asynchronous
-    const organizationName = event.target.value;
+  searchOrganization = () => {
+    const { organizationName } = this.state;
     if (organizationName) {
       this.fetchOrganizations(organizationName);
     } else {
@@ -91,10 +93,8 @@ class EventForm extends Component {
     }
   }
 
-  searchUser = (event) => {
-    this.handleChange('username')(event);
-    // avoid to get value from state, since state is asynchronous
-    const username = event.target.value;
+  searchUser = () => {
+    const { username } = this.state;
     if (username) {
       this.fetchUsers(username);
     } else {
@@ -103,29 +103,77 @@ class EventForm extends Component {
   }
 
   async fetchOrganizations(name) {
-    const { organizations } = await DataFetcher.fetchData('organizations/searchByName', name);
-    this.setState({ organizations });
+    try {
+      const { organizations } = await DataFetcher.fetchData('organizations/searchByName', name);
+      this.setState({ organizations });
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   async fetchUsers(name) {
-    const { users } = await DataFetcher.fetchData('users/searchByName', name);
-    this.setState({ users });
+    try {
+      const { users } = await DataFetcher.fetchData('users/searchByName', name);
+      this.setState({ users });
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   render() {
     const {
       name, organizationName, username,
-      organizations, selectedOrganizations,
-      users, selectedUsers,
+      organizations, users,
     } = this.state;
 
-    return (
-      <form
-        noValidate
-        autoComplete="on"
-      >
-        <FormGroup>
+    const organizationComponents = (
+      <Grid>
+        <TextField
+          id="organization"
+          label="Organization Name"
+          placeholder="Organization Name"
+          value={organizationName}
+          onChange={this.handleChange('organizationName')}
+        />
+        <IconButton onClick={this.searchOrganization}>
+          <SearchIcon />
+        </IconButton>
+        <ListWithChips
+          items={organizations}
+          itemLabel="name"
+          onChange={this.update('selectedOrganizations')}
+        />
+      </Grid>
+    );
 
+    const userComponents = (
+      <Grid>
+        <TextField
+          id="user"
+          label="Username"
+          placeholder="Username"
+          value={username}
+          onChange={this.handleChange('username')}
+        />
+        <IconButton onClick={this.searchUser}>
+          <SearchIcon />
+        </IconButton>
+        <ListWithChips
+          items={users}
+          itemLabel="name"
+          onChange={this.update('selectedUsers')}
+        />
+      </Grid>
+    );
+
+    return (
+      <form>
+        <Grid
+          container
+          direction="column"
+          justify="center"
+          alignItems="stretch"
+        >
           <TextField
             id="name"
             label="Event Name"
@@ -134,37 +182,11 @@ class EventForm extends Component {
             onChange={this.handleChange('name')}
           />
 
-          <TextField
-            id="organization"
-            label="Organization Name"
-            placeholder="Organization Name"
-            value={organizationName}
-            onChange={this.searchOrganization}
-          />
-          <ListWithChips
-            items={organizations}
-            itemLabel="name"
-            onChange={this.update('selectedOrganizations')}
-          />
-
-          <TextField
-            id="user"
-            label="Username"
-            placeholder="Username"
-            value={username}
-            onChange={this.searchUser}
-          />
-          <ListWithChips
-            items={users}
-            itemLabel="name"
-            onChange={this.update('selectedUsers')}
-          />
+          { organizationComponents }
+          { userComponents }
 
           <Button onClick={this.handleSubmit}> Create Event </Button>
-
-        </FormGroup>
-
-
+        </Grid>
       </form>
     );
   }

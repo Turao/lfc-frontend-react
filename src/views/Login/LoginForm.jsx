@@ -46,7 +46,7 @@ class LoginForm extends Component {
       },
     };
 
-    const response = await fetch('http://localhost:3001/api/login', {
+    const response = await fetch('http://api.localhost:3001/login', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -57,8 +57,8 @@ class LoginForm extends Component {
 
     if (response.ok) {
       try {
-        const token = await response.json().then(json => json.token);
-        onLogin(token);
+        const { token, user } = await response.json();
+        onLogin(token, user);
       } catch (error) {
         onFailedLogin();
       }

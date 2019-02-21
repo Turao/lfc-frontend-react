@@ -1,22 +1,42 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import loadModelData from '../ModelLoader';
+import DataFetcher from '../../../dataFetcher';
+import OrganizationPropType from './proptype';
 
-function Organization(props) {
-  const { organization } = props;
-  const { name } = organization;
-  return (
-    <React.Fragment>
-      { name }
-    </React.Fragment>
-  );
+
+class Organization extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: props.match.params.id,
+      organization: null,
+    };
+  }
+
+  componentDidMount() {
+    this.fetchOrganizationData();
+  }
+
+  async fetchOrganizationData() {
+    const { id } = this.state;
+    const organization = await DataFetcher.fetchData(`organization/${id}`);
+    this.setState({ organization });
+  }
+
+  renderOrganization() {
+    const { organization } = this.state;
+    return null;
+  }
+
+  render() {
+    const { organization } = this.state;
+    return organization ? this.renderOrganization() : null;
+  }
 }
 
 Organization.propTypes = {
-  organization: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-  }).isRequired,
+  organization: OrganizationPropType,
 };
 
-export default loadModelData(Organization, 'organization');
+export default Organization;

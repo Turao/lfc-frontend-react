@@ -1,21 +1,40 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import OrganizationList from './OrganizationList';
-import loadModelData from '../ModelLoader';
+import DataFetcher from '../../../dataFetcher';
+import OrganizationPropType from './proptype';
 
 
-function Organizations(props) {
-  const { organizations } = props;
-  return (
-    <React.Fragment>
-      <OrganizationList organizations={organizations} />
-    </React.Fragment>
-  );
+class Organizations extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      organizations: null,
+    };
+  }
+
+  componentDidMount() {
+    this.fetchOrganizationsData();
+  }
+
+  async fetchOrganizationskData() {
+    const organizations = await DataFetcher.fetchData('organizations');
+    this.setState({ organizations });
+  }
+
+  renderOrganizations() {
+    const { organizations } = this.state;
+    return null;
+  }
+
+  render() {
+    const { organizations } = this.state;
+    return organizations ? this.renderOrganizations() : null;
+  }
 }
 
 Organizations.propTypes = {
-  organizations: PropTypes.arrayOf(PropTypes.object).isRequired,
+  organizations: PropTypes.arrayOf(OrganizationPropType),
 };
 
-export default loadModelData(Organizations, 'organizations');
+export default Organizations;

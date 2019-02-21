@@ -1,20 +1,40 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-// import CheckerList from './CheckersList';
-import loadModelData from '../ModelLoader';
+import DataFetcher from '../../../dataFetcher';
+import FactCheckPropType from './proptype';
 
 
-function FactChecks(props) {
-  const { factChecks } = props;
-  return (
-    <React.Fragment>
-    </React.Fragment>
-  );
+class FactChecks extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      factchecks: null,
+    };
+  }
+
+  componentDidMount() {
+    this.fetchFactChecksData();
+  }
+
+  async fetchFactChecksData() {
+    const factchecks = await DataFetcher.fetchData('factchecks');
+    this.setState({ factchecks });
+  }
+
+  renderFactChecks() {
+    const { factchecks } = this.state;
+    return null;
+  }
+
+  render() {
+    const { factchecks } = this.state;
+    return factchecks ? this.renderFactChecks() : null;
+  }
 }
 
 FactChecks.propTypes = {
-  factChecks: PropTypes.arrayOf(PropTypes.object).isRequired,
+  factchecks: PropTypes.arrayOf(FactCheckPropType),
 };
 
-export default loadModelData(FactChecks, 'factChecks');
+export default FactChecks;

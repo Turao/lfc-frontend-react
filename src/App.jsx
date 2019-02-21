@@ -30,12 +30,6 @@ import Organizations from './views/Models/Organization/Organizations';
 import Party from './views/Models/Party/Party';
 import Parties from './views/Models/Party/Parties';
 
-import Politician from './views/Models/Politician/Politician';
-import Politicians from './views/Models/Politician/Politicians';
-
-import Source from './views/Models/Source/Source';
-import Sources from './views/Models/Source/Sources';
-
 import Statement from './views/Models/Statement/Statement';
 import Statements from './views/Models/Statement/Statements';
 
@@ -43,6 +37,9 @@ import Statements from './views/Models/Statement/Statements';
 const theme = createMuiTheme({
   palette: {
     primary: blue,
+  },
+  typography: {
+    useNextVariants: true,
   },
 });
 
@@ -57,6 +54,7 @@ function App() {
         direction="row"
         justify="center"
         alignItems="center"
+        alignContent="center"
       >
 
         <Route exact path="/" component={Home} />
@@ -64,7 +62,7 @@ function App() {
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
 
-        <Route exact path="/me" component={Account} />
+        <Route exact path="/account" component={Account} />
 
         <Route exact path="/events" component={Events} />
         <Route exact path="/events/new" component={NewEvent} />
@@ -83,12 +81,6 @@ function App() {
 
         <Route exact path="/parties/" component={Parties} />
         <Route exact path="/party/:id" component={Party} />
-
-        <Route exact path="/politicians/" component={Politicians} />
-        <Route exact path="/politician/:id" component={Politician} />
-
-        <Route exact path="/sources/" component={Sources} />
-        <Route exact path="/source/:id" component={Source} />
 
         <Route exact path="/statements/" component={Statements} />
         <Route exact path="/statement/:id" component={Statement} />
