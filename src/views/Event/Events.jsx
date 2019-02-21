@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import DataFetcher from '../../../dataFetcher';
+import DataFetcher from '../../dataFetcher';
 import EventInfo from './EventInfo';
 
 class Events extends Component {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import DataFetcher from '../../../dataFetcher';
+import DataFetcher from '../../dataFetcher';
 import FactCheckInfo from './FactCheckInfo';
 
 

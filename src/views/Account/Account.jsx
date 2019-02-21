@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import DataFetcher from '../../dataFetcher';
-import UserInfo from '../Models/User/UserInfo';
+import UserInfo from '../User/UserInfo';
 
 
 class Account extends Component {
