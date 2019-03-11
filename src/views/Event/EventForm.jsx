@@ -29,7 +29,9 @@ class EventForm extends Component {
     this.fetchModerators();
   }
 
-  handleSubmit = async () => {
+  handleSubmit = async (_event) => {
+    _event.preventDefault();
+
     const {
       name,
       selectedOrganization,
@@ -46,8 +48,7 @@ class EventForm extends Component {
     };
 
     try {
-      const response = await DataFetcher.sendDataToAPI('event', data);
-      const { event } = response;
+      const event = await DataFetcher.sendDataToAPI('event', data);
       onSuccess(event);
     } catch (error) {
       onFailure(error);
@@ -148,7 +149,7 @@ class EventForm extends Component {
     } = this.state;
 
     return (
-      <form noValidate autoComplete="off">
+      <form onSubmit={this.handleSubmit}>
         <FormGroup>
 
           <TextField
@@ -163,7 +164,7 @@ class EventForm extends Component {
             { organizations ? this.renderOrganizationsDataTable() : null }
           </Grid>
 
-          <Button onClick={this.handleSubmit}> Create Event </Button>
+          <Button type="submit"> Create Event </Button>
 
         </FormGroup>
       </form>

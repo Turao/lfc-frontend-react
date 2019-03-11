@@ -1,10 +1,10 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import blue from '@material-ui/core/colors/blue';
 
-import { Grid } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 import MenuAppBar from './components/MenuAppBar';
 
 import Home from './views/Home/Home';
@@ -26,9 +26,11 @@ import FactChecks from './views/FactCheck/FactChecks';
 
 import Organization from './views/Organization/Organization';
 import Organizations from './views/Organization/Organizations';
+import NewOrganization from './views/Organization/NewOrganization';
 
 import Party from './views/Party/Party';
 import Parties from './views/Party/Parties';
+import NewParty from './views/Party/NewParty';
 
 import Statement from './views/Statement/Statement';
 import Statements from './views/Statement/Statements';
@@ -64,26 +66,39 @@ function App() {
 
         <Route exact path="/account" component={Account} />
 
-        <Route exact path="/events" component={Events} />
-        <Route exact path="/event/:id" component={Event} />
-        <Route exact path="/event/new" component={NewEvent} />
+        <Switch>
+          <Route exact path="/events" component={Events} />
+          <Route exact path="/event/new" component={NewEvent} />
+          <Route exact path="/event/:id" component={Event} />
+        </Switch>
 
-        <Route exact path="/user/:id" component={User} />
-        <Route exact path="/users/" component={Users} />
-
+        <Switch>
+          <Route exact path="/user/:id" component={User} />
+          <Route exact path="/users/" component={Users} />
+        </Switch>
 
         {/* debug only */}
-        <Route exact path="/factchecks/" component={FactChecks} />
-        <Route exact path="/factcheck/:id" component={FactCheck} />
+        <Switch>
+          <Route exact path="/factchecks/" component={FactChecks} />
+          <Route exact path="/factcheck/:id" component={FactCheck} />
+        </Switch>
 
-        <Route exact path="/organizations/" component={Organizations} />
-        <Route exact path="/organization/:id" component={Organization} />
+        <Switch>
+          <Route exact path="/organizations/" component={Organizations} />
+          <Route exact path="/organization/new" component={NewOrganization} />
+          <Route exact path="/organization/:id" component={Organization} />
+        </Switch>
 
-        <Route exact path="/parties/" component={Parties} />
-        <Route exact path="/party/:id" component={Party} />
+        <Switch>
+          <Route exact path="/parties/" component={Parties} />
+          <Route exact path="/party/new" component={NewParty} />
+          <Route exact path="/party/:id" component={Party} />
+        </Switch>
 
-        <Route exact path="/statements/" component={Statements} />
-        <Route exact path="/statement/:id" component={Statement} />
+        <Switch>
+          <Route exact path="/statements/" component={Statements} />
+          <Route exact path="/statement/:id" component={Statement} />
+        </Switch>
 
       </Grid>
 

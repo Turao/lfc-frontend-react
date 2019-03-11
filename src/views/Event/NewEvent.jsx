@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import EventForm from './EventForm';
 
@@ -7,12 +8,12 @@ class NewEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      redirectToEvent: null,
+      redirect: null,
     };
   }
 
   onSuccess = (event) => {
-    this.setState({ redirectToEvent: event });
+    this.setState({ redirect: event });
   }
 
   onFailure = (error) => {
@@ -21,9 +22,11 @@ class NewEvent extends Component {
   }
 
   render() {
-    const { redirectToEvent } = this.state;
+    const { redirect } = this.state;
     return (
-      redirectToEvent ? null : <EventForm onSuccess={this.onSuccess} onFailure={this.onFailure} />
+      redirect
+        ? <Redirect to={`/event/${redirect.id}`} />
+        : <EventForm onSuccess={this.onSuccess} onFailure={this.onFailure} />
     );
   }
 }
