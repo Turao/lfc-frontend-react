@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import MUIDataTable from 'mui-datatables';
 
 import DataFetcher from '../../dataFetcher';
+import { Grid } from '@material-ui/core';
 
 
 class EventForm extends Component {
@@ -69,6 +70,7 @@ class EventForm extends Component {
     this.setState({ moderators });
   }
 
+
   renderModeratorsDataTable() {
     const { moderators } = this.state;
     const columns = [{
@@ -90,8 +92,7 @@ class EventForm extends Component {
     }];
 
     const options = {
-      filterType: 'dropdown',
-      selectableRows: false,
+      selectableRows: true,
       filter: false,
       print: false,
       download: false,
@@ -122,8 +123,7 @@ class EventForm extends Component {
     }];
 
     const options = {
-      filterType: 'dropdown',
-      selectableRows: false,
+      selectableRows: true,
       filter: false,
       print: false,
       download: false,
@@ -143,8 +143,8 @@ class EventForm extends Component {
   render() {
     const {
       name,
-      organizations, selectedOrganization,
-      moderators, selectedModerators,
+      organizations,
+      moderators,
     } = this.state;
 
     return (
@@ -158,8 +158,10 @@ class EventForm extends Component {
             onChange={this.handleChange('name')}
           />
 
-          { moderators ? this.renderModeratorsDataTable() : null }
-          { organizations ? this.renderOrganizationsDataTable() : null }
+          <Grid container alignItems="flex-start">
+            { moderators ? this.renderModeratorsDataTable() : null }
+            { organizations ? this.renderOrganizationsDataTable() : null }
+          </Grid>
 
           <Button onClick={this.handleSubmit}> Create Event </Button>
 

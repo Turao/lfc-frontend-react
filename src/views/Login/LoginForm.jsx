@@ -31,7 +31,9 @@ class LoginForm extends Component {
   }
 
 
-  handleSubmit = async () => {
+  handleSubmit = async (event) => {
+    event.preventDefault();
+
     const { email, password } = this.state;
     const { onSuccess, onFailure } = this.props;
 
@@ -66,7 +68,7 @@ class LoginForm extends Component {
     const { email, password, showPassword } = this.state;
 
     return (
-      <form noValidate autoComplete="off">
+      <form onSubmit={this.handleSubmit}>
         <FormGroup>
 
           <TextField
@@ -96,7 +98,7 @@ class LoginForm extends Component {
             />
           </FormControl>
 
-          <Button onClick={this.handleSubmit}> Login </Button>
+          <Button type="submit"> Login </Button>
 
         </FormGroup>
       </form>

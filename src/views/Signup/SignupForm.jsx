@@ -33,7 +33,9 @@ class SignupForm extends Component {
     };
   }
 
-  handleSubmit = async () => {
+  handleSubmit = async (event) => {
+    event.preventDefault();
+
     const {
       username, email,
       firstName, lastName,
@@ -79,7 +81,7 @@ class SignupForm extends Component {
     } = this.state;
 
     return (
-      <form noValidate autoComplete="off">
+      <form onSubmit={this.handleSubmit}>
         <FormGroup>
 
           <TextField
@@ -131,7 +133,7 @@ class SignupForm extends Component {
             />
           </FormControl>
 
-          <Button onClick={this.handleSubmit}> Sign Up </Button>
+          <Button type="submit"> Sign Up </Button>
 
         </FormGroup>
       </form>
