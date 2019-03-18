@@ -1,39 +1,36 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
 
 import DataFetcher from '../../dataFetcher';
 import OrganizationInfo from './OrganizationInfo';
 
+function Organizations() {
+  const [organizations, setOrganizations] = useState([]);
 
-class Organizations extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      organizations: null,
+  useEffect(() => {
+    const fetchOrganizations = async () => {
+      const data = await DataFetcher.getDataFromAPI('organizations');
+      setOrganizations(data);
     };
-  }
 
-  componentDidMount() {
-    this.fetchOrganizationsData();
-  }
+    fetchOrganizations();
+  });
 
-  async fetchOrganizationsData() {
-    const organizations = await DataFetcher.getDataFromAPI('organizations');
-    this.setState({ organizations });
-  }
+  return (
+    <React.Fragment>
 
-  renderOrganizations() {
-    const { organizations } = this.state;
-    return (
-      organizations.map(organization => (
+      {organizations.map(organization => (
         <OrganizationInfo organization={organization} key={organization.id} />
-      ))
-    );
-  }
+      ))}
 
-  render() {
-    const { organizations } = this.state;
-    return organizations ? this.renderOrganizations() : null;
-  }
+      <Button href="/organization/new">
+        <AddIcon />
+        Add Organization
+      </Button>
+    </React.Fragment>
+  );
 }
 
 export default Organizations;

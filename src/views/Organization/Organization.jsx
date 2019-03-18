@@ -1,36 +1,21 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import DataFetcher from '../../dataFetcher';
 import OrganizationInfo from './OrganizationInfo';
 
-class Organization extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      id: props.match.params.id,
-      organization: null,
+function Organization(props) {
+  const [organization, setOrganization] = useState({});
+
+  useEffect(() => {
+    const fetchOrganization = async () => {
+      const data = await DataFetcher.getDataFromAPI(`organization/${props.match.params.id}`);
+      setOrganization(data);
     };
-  }
 
-  componentDidMount() {
-    this.fetchOrganizationData();
-  }
+    fetchOrganization();
+  });
 
-  async fetchOrganizationData() {
-    const { id } = this.state;
-    const organization = await DataFetcher.getDataFromAPI(`organization/${id}`);
-    this.setState({ organization });
-  }
-
-  renderOrganization() {
-    const { organization } = this.state;
-    return <OrganizationInfo organization={organization} />;
-  }
-
-  render() {
-    const { organization } = this.state;
-    return organization ? this.renderOrganization() : null;
-  }
+  return <OrganizationInfo organization={organization} />;
 }
 
 export default Organization;

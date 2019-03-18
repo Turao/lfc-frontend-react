@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Button from '@material-ui/core/Button';
@@ -6,25 +6,11 @@ import TextField from '@material-ui/core/TextField';
 
 import DataFetcher from '../../dataFetcher';
 
-class OrganizationForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-    };
-  }
+function OrganizationForm({ onSuccess, onFailure }) {
+  const [name, setName] = useState('');
 
-  handleChange = prop => (event) => {
-    this.setState({
-      [prop]: event.target.value,
-    });
-  }
-
-  handleSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const { name } = this.state;
-    const { onSuccess, onFailure } = this.props;
 
     const data = {
       organization: {
@@ -38,23 +24,20 @@ class OrganizationForm extends Component {
     } catch (error) {
       onFailure(error);
     }
-  }
+  };
 
-  render() {
-    const { name } = this.state;
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <TextField
-          id="name"
-          label="Name"
-          value={name}
-          onChange={this.handleChange('name')}
-        />
+  return (
+    <form onSubmit={handleSubmit}>
+      <TextField
+        id="name"
+        label="Name"
+        value={name}
+        onChange={event => setName(event.target.value)}
+      />
 
-        <Button type="submit"> Create Organization </Button>
-      </form>
-    );
-  }
+      <Button type="submit"> Create Organization </Button>
+    </form>
+  );
 }
 
 OrganizationForm.propTypes = {
