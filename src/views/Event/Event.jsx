@@ -6,9 +6,13 @@ import EventInfo from './EventInfo';
 function Event(props) {
   const [event, setEvent] = useState([]);
 
-  useEffect(async () => {
-    const data = await DataFetcher.getDataFromAPI(`event/${props.match.params.id}`);
-    setEvent(data);
+  useEffect(() => {
+    const fetchEvent = async () => {
+      const data = await DataFetcher.getDataFromAPI(`event/${props.match.params.id}`);
+      setEvent(data);
+    };
+
+    fetchEvent();
   }, []);
 
   return <EventInfo event={event} />;

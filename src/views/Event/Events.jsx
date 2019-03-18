@@ -8,10 +8,13 @@ import EventInfo from './EventInfo';
 function Events() {
   const [events, setEvents] = useState([]);
 
-  useEffect(async () => {
-    const data = await DataFetcher.getDataFromAPI('events');
-    setEvents(data);
-    console.log(data, events);
+  useEffect(() => {
+    const fetchEvents = async () => {
+      const data = await DataFetcher.getDataFromAPI('events');
+      setEvents(data);
+    };
+
+    fetchEvents();
   }, []);
 
   return (
