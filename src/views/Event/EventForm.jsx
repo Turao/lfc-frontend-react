@@ -11,7 +11,7 @@ import MUIDataTable from 'mui-datatables';
 import DataFetcher from '../../dataFetcher';
 
 
-function EventForm(props) {
+function EventForm({ onSuccess, onFailure }) {
   const [name, setName] = useState('');
   const [selectedOrganization, setSelectedOrganization] = useState(null);
   const [selectedModerators, setSelectedModerators] = useState([]);
@@ -37,8 +37,6 @@ function EventForm(props) {
 
   const handleSubmit = async (_event) => {
     _event.preventDefault();
-
-    const { onSuccess, onFailure } = props;
 
     const data = {
       event: {
