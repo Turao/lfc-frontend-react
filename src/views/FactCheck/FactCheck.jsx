@@ -1,36 +1,21 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import DataFetcher from '../../dataFetcher';
 import FactCheckInfo from './FactCheckInfo';
 
-class FactCheck extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      id: props.match.params.id,
-      factcheck: null,
+function FactCheck(props) {
+  const [factcheck, setFactCheck] = useState({});
+
+  useEffect(() => {
+    const fetchFactCheck = async () => {
+      const data = await DataFetcher.getDataFromAPI(`factcheck/${props.match.params.id}`);
+      setFactCheck(data);
     };
-  }
 
-  componentDidMount() {
-    this.fetchFactCheckData();
-  }
+    fetchFactCheck();
+  });
 
-  async fetchFactCheckData() {
-    const { id } = this.state;
-    const factcheck = await DataFetcher.getDataFromAPI(`factcheck/${id}`);
-    this.setState({ factcheck });
-  }
-
-  renderFactCheck() {
-    const { factcheck } = this.state;
-    return <FactCheckInfo factcheck={factcheck} />;
-  }
-
-  render() {
-    const { factcheck } = this.state;
-    return factcheck ? this.renderFactCheck() : null;
-  }
+  return <FactCheckInfo factcheck={factcheck} />;
 }
 
 export default FactCheck;
