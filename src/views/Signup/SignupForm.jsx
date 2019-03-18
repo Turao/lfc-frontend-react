@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import FormGroup from '@material-ui/core/FormGroup';
@@ -20,28 +20,16 @@ import Button from '@material-ui/core/Button';
 import DataFetcher from '../../dataFetcher';
 
 
-class SignupForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showPassword: false,
-      username: '',
-      password: '',
-      email: '',
-      firstName: '',
-      lastName: '',
-    };
-  }
+function SignupForm({ onSuccess, onFailure }) {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
-  handleSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const {
-      username, email,
-      firstName, lastName,
-      password,
-    } = this.state;
-    const { onSuccess, onFailure } = this.props;
 
     const data = {
       user: {
@@ -60,85 +48,70 @@ class SignupForm extends Component {
     } catch (error) {
       onFailure(error);
     }
-  }
+  };
 
-  handleChange = prop => (event) => {
-    this.setState({
-      [prop]: event.target.value,
-    });
-  }
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
-  handleClickShowPassword = () => {
-    const { showPassword } = this.state;
-    this.setState({ showPassword: !showPassword });
-  }
+  return (
+    <form onSubmit={handleSubmit}>
+      <FormGroup>
 
-  render() {
-    const {
-      username, email,
-      firstName, lastName,
-      password, showPassword,
-    } = this.state;
+        <TextField
+          id="username"
+          label="Userame"
+          value={username}
+          onChange={event => setUsername(event.target.value)}
+        />
 
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <FormGroup>
+        <TextField
+          id="email"
+          label="Email"
+          // className={classes.textField}
+          value={email}
+          onChange={event => setEmail(event.target.value)}
+        />
 
-          <TextField
-            id="username"
-            label="Userame"
-            value={username}
-            onChange={this.handleChange('username')}
+        <TextField
+          id="firstName"
+          label="First Name"
+          value={firstName}
+          onChange={event => setFirstName(event.target.value)}
+        />
+
+        <TextField
+          id="lastName"
+          label="Last Name"
+          value={lastName}
+          onChange={event => setLastName(event.target.value)}
+        />
+
+        <FormControl>
+          <InputLabel>Password</InputLabel>
+          <Input
+            id="password"
+            type={showPassword ? 'text' : 'password'}
+            value={password}
+            onChange={event => setPassword(event.target.value)}
+            endAdornment={(
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="Toggle password visibility"
+                  onClick={toggleShowPassword}
+                >
+                  { showPassword ? <VisibilityOff /> : <Visibility /> }
+                </IconButton>
+              </InputAdornment>
+            )}
           />
+        </FormControl>
 
-          <TextField
-            id="email"
-            label="Email"
-            // className={classes.textField}
-            value={email}
-            onChange={this.handleChange('email')}
-          />
+        <Button type="submit"> Sign Up </Button>
 
-          <TextField
-            id="firstName"
-            label="First Name"
-            value={firstName}
-            onChange={this.handleChange('firstName')}
-          />
-
-          <TextField
-            id="lastName"
-            label="Last Name"
-            value={lastName}
-            onChange={this.handleChange('lastName')}
-          />
-
-          <FormControl>
-            <InputLabel>Password</InputLabel>
-            <Input
-              id="password"
-              type={showPassword ? 'text' : 'password'}
-              value={password}
-              onChange={this.handleChange('password')}
-              endAdornment={(
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="Toggle password visibility"
-                    onClick={this.handleClickShowPassword}
-                  >
-                    { showPassword ? <VisibilityOff /> : <Visibility /> }
-                  </IconButton>
-                </InputAdornment>
-              )}
-            />
-          </FormControl>
-
-          <Button type="submit"> Sign Up </Button>
-
-        </FormGroup>
-      </form>
-    );
-  }
+      </FormGroup>
+    </form>
+  );
 }
 
 SignupForm.propTypes = {

@@ -1,40 +1,29 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import DataFetcher from '../../dataFetcher';
 import UserInfo from './UserInfo';
 
-class Users extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      users: null,
+function Users() {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const data = await DataFetcher.getDataFromAPI('users');
+      setUsers(data);
     };
-  }
 
-  componentDidMount() {
-    this.fetchUsersData();
-  }
+    fetchUsers();
+  }, []);
 
-  async fetchUsersData() {
-    const users = await DataFetcher.getDataFromAPI('users');
-    this.setState({ users });
-  }
+  return (
+    <React.Fragment>
 
-  renderUsers() {
-    const { users } = this.state;
-    return (
-      <React.Fragment>
-        {
-          users.map(user => <UserInfo user={user} key={user.id} />)
-        }
-      </React.Fragment>
-    );
-  }
+      {users.map(user => (
+        <UserInfo user={user} key={user.id} />
+      ))}
 
-  render() {
-    const { users } = this.state;
-    return users ? this.renderUsers() : null;
-  }
+    </React.Fragment>
+  );
 }
 
 export default Users;

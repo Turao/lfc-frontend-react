@@ -13,7 +13,7 @@ function FactCheck(props) {
     };
 
     fetchFactCheck();
-  });
+  }, []);
 
   return <FactCheckInfo factcheck={factcheck} />;
 }

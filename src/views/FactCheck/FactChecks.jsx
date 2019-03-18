@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
+
 import DataFetcher from '../../dataFetcher';
 import FactCheckInfo from './FactCheckInfo';
-
 
 function FactChecks() {
   const [factchecks, setFactChecks] = useState([]);
@@ -14,12 +16,20 @@ function FactChecks() {
     };
 
     fetchFactChecks();
-  });
+  }, []);
 
   return (
-    factchecks.map(factcheck => (
-      <FactCheckInfo factcheck={factcheck} key={factcheck.id} />
-    ))
+    <React.Fragment>
+
+      {factchecks.map(factcheck => (
+        <FactCheckInfo factcheck={factcheck} key={factcheck.id} />
+      ))}
+
+      <Button href="/factcheck/new">
+        <AddIcon />
+        Add FactCheck
+      </Button>
+    </React.Fragment>
   );
 }
 

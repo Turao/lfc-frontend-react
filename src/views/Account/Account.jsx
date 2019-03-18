@@ -1,41 +1,26 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import DataFetcher from '../../dataFetcher';
 import UserInfo from '../User/UserInfo';
 
+function Account() {
+  const [user, setUser] = useState(null);
 
-class Account extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: null,
+  useEffect(() => {
+    const fetchUser = async () => {
+      const id = sessionStorage.getItem('user.id');
+      const data = await DataFetcher.getDataFromAPI(`user/${id}`);
+      setUser(data);
     };
-  }
 
-  componentDidMount() {
-    this.fetchUserData();
-  }
+    fetchUser();
+  }, []);
 
-  async fetchUserData() {
-    const id = sessionStorage.getItem('user.id');
-    const user = await DataFetcher.getDataFromAPI(`user/${id}`);
-    this.setState({ user });
-  }
-
-  renderAccount() {
-    const { user } = this.state;
-    return <UserInfo user={user} />;
-  }
-
-  render() {
-    const { user } = this.state;
-    return (
-      <React.Fragment>
-        { user ? this.renderAccount() : null }
-
-      </React.Fragment>
-    );
-  }
+  return (
+    <React.Fragment>
+      { user ? <UserInfo user={user} /> : null }
+    </React.Fragment>
+  );
 }
 
 export default Account;

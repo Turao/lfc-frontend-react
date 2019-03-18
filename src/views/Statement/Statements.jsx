@@ -1,40 +1,36 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
 
 import DataFetcher from '../../dataFetcher';
 import StatementInfo from './StatementInfo';
 
-class Statements extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      statements: null,
+function Statements() {
+  const [statements, setStatements] = useState([]);
+
+  useEffect(() => {
+    const fetchStatements = async () => {
+      const data = await DataFetcher.getDataFromAPI('statements');
+      setStatements(data);
     };
-  }
 
-  componentDidMount() {
-    this.fetchStatementsData();
-  }
+    fetchStatements();
+  }, []);
 
-  async fetchStatementsData() {
-    const statements = await DataFetcher.getDataFromAPI('statements');
-    this.setState({ statements });
-  }
+  return (
+    <React.Fragment>
 
-  renderStatements() {
-    const { statements } = this.state;
-    return (
-      <React.Fragment>
-        {
-          statements.map(statement => <StatementInfo statement={statement} key={statement.id} />)
-        }
-      </React.Fragment>
-    );
-  }
+      {statements.map(statement => (
+        <StatementInfo statement={statement} key={statement.id} />
+      ))}
 
-  render() {
-    const { statements } = this.state;
-    return statements ? this.renderStatements() : null;
-  }
+      <Button href="/statement/new">
+        <AddIcon />
+        Add Statement
+      </Button>
+    </React.Fragment>
+  );
 }
 
 export default Statements;

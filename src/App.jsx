@@ -19,8 +19,6 @@ import NewEvent from './views/Event/NewEvent';
 import User from './views/User/User';
 import Users from './views/User/Users';
 
-// debug only
-
 import FactCheck from './views/FactCheck/FactCheck';
 import FactChecks from './views/FactCheck/FactChecks';
 
@@ -34,7 +32,9 @@ import NewParty from './views/Party/NewParty';
 
 import Statement from './views/Statement/Statement';
 import Statements from './views/Statement/Statements';
+import NewStatement from './views/Statement/NewStatement';
 
+import NotFound from './views/NotFound';
 
 const theme = createMuiTheme({
   palette: {
@@ -58,46 +58,39 @@ function App() {
         alignItems="center"
         alignContent="center"
       >
-
-        <Route exact path="/" component={Home} />
-
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={Signup} />
-
-        <Route exact path="/account" component={Account} />
-
         <Switch>
+
+          <Route exact path="/" component={Home} />
+
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Signup} />
+
+          <Route exact path="/account" component={Account} />
+
           <Route exact path="/events" component={Events} />
           <Route exact path="/event/new" component={NewEvent} />
           <Route exact path="/event/:id" component={Event} />
-        </Switch>
 
-        <Switch>
           <Route exact path="/user/:id" component={User} />
           <Route exact path="/users/" component={Users} />
-        </Switch>
 
-        {/* debug only */}
-        <Switch>
           <Route exact path="/factchecks/" component={FactChecks} />
           <Route exact path="/factcheck/:id" component={FactCheck} />
-        </Switch>
 
-        <Switch>
           <Route exact path="/organizations/" component={Organizations} />
           <Route exact path="/organization/new" component={NewOrganization} />
           <Route exact path="/organization/:id" component={Organization} />
-        </Switch>
 
-        <Switch>
           <Route exact path="/parties/" component={Parties} />
           <Route exact path="/party/new" component={NewParty} />
           <Route exact path="/party/:id" component={Party} />
-        </Switch>
 
-        <Switch>
           <Route exact path="/statements/" component={Statements} />
+          <Route exact path="/statement/new" component={NewStatement} />
           <Route exact path="/statement/:id" component={Statement} />
+
+
+          <Route component={NotFound} />
         </Switch>
 
       </Grid>

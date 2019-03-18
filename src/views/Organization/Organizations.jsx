@@ -16,7 +16,7 @@ function Organizations() {
     };
 
     fetchOrganizations();
-  });
+  }, []);
 
   return (
     <React.Fragment>

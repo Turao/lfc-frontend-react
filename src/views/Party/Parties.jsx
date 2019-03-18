@@ -16,7 +16,7 @@ function Parties() {
     };
 
     fetchParties();
-  });
+  }, []);
 
   return (
     <React.Fragment>

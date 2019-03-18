@@ -13,7 +13,7 @@ function Organization(props) {
     };
 
     fetchOrganization();
-  });
+  }, []);
 
   return <OrganizationInfo organization={organization} />;
 }

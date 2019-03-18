@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import FormGroup from '@material-ui/core/FormGroup';
@@ -20,22 +20,13 @@ import Button from '@material-ui/core/Button';
 import DataFetcher from '../../dataFetcher';
 
 
-class LoginForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showPassword: false,
-      email: '',
-      password: '',
-    };
-  }
+function LoginForm({ onSuccess, onFailure }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
-
-  handleSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const { email, password } = this.state;
-    const { onSuccess, onFailure } = this.props;
 
     const data = {
       user: {
@@ -51,59 +42,48 @@ class LoginForm extends Component {
     } catch (error) {
       onFailure(error);
     }
-  }
+  };
 
-  handleChange = prop => (event) => {
-    this.setState({
-      [prop]: event.target.value,
-    });
-  }
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
-  handleClickShowPassword = () => {
-    const { showPassword } = this.state;
-    this.setState({ showPassword: !showPassword });
-  }
+  return (
+    <form onSubmit={handleSubmit}>
+      <FormGroup>
 
-  render() {
-    const { email, password, showPassword } = this.state;
+        <TextField
+          id="email"
+          label="Email"
+          value={email}
+          onChange={event => setEmail(event.target.value)}
+        />
 
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <FormGroup>
-
-          <TextField
-            id="email"
-            label="Email"
-            value={email}
-            onChange={this.handleChange('email')}
+        <FormControl>
+          <InputLabel>Password</InputLabel>
+          <Input
+            id="password"
+            type={showPassword ? 'text' : 'password'}
+            value={password}
+            onChange={event => setPassword(event.target.value)}
+            endAdornment={(
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="Toggle password visibility"
+                  onClick={toggleShowPassword}
+                >
+                  { showPassword ? <VisibilityOff /> : <Visibility /> }
+                </IconButton>
+              </InputAdornment>
+            )}
           />
+        </FormControl>
 
-          <FormControl>
-            <InputLabel>Password</InputLabel>
-            <Input
-              id="password"
-              type={showPassword ? 'text' : 'password'}
-              value={password}
-              onChange={this.handleChange('password')}
-              endAdornment={(
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="Toggle password visibility"
-                    onClick={this.handleClickShowPassword}
-                  >
-                    { showPassword ? <VisibilityOff /> : <Visibility /> }
-                  </IconButton>
-                </InputAdornment>
-              )}
-            />
-          </FormControl>
+        <Button type="submit"> Login </Button>
 
-          <Button type="submit"> Login </Button>
-
-        </FormGroup>
-      </form>
-    );
-  }
+      </FormGroup>
+    </form>
+  );
 }
 
 LoginForm.propTypes = {

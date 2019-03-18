@@ -13,7 +13,7 @@ function Party(props) {
     };
 
     fetchParty();
-  });
+  }, []);
 
   return <PartyInfo party={party} />;
 }

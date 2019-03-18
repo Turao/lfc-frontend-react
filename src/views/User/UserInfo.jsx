@@ -1,37 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Card, CardContent, Typography } from '@material-ui/core';
 
 import UserPropType from './proptype';
 
+function UserInfo({ user }) {
+  return (
+    <Card>
+      <CardContent>
+        <Typography variant="h5">
+          { user.username }
+        </Typography>
 
-class UserInfo extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: props.user,
-    };
-  }
+        <Typography variant="subtitle2">
+          { `${user.firstName} ${user.lastName}` }
+        </Typography>
 
-  render() {
-    const { user } = this.state;
-    return (
-      <Card>
-        <CardContent>
-          <Typography variant="h5">
-            { user.username }
-          </Typography>
-
-          <Typography variant="subtitle2">
-            { `${user.firstName} ${user.lastName}` }
-          </Typography>
-
-          <Typography variant="overline">
-            { user.email }
-          </Typography>
-        </CardContent>
-      </Card>
-    );
-  }
+        <Typography variant="overline">
+          { user.email }
+        </Typography>
+      </CardContent>
+    </Card>
+  );
 }
 
 UserInfo.propTypes = {

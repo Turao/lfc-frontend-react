@@ -1,48 +1,21 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 
 import DataFetcher from '../../dataFetcher';
 import UserInfo from './UserInfo';
 
+function User(props) {
+  const [user, setUser] = useState({});
 
-class User extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      id: props.match.params.id,
-      user: null,
+  useEffect(() => {
+    const fetchUser = async () => {
+      const data = await DataFetcher.getDataFromAPI(`user/${props.match.params.id}`);
+      setUser(data);
     };
-  }
 
-  componentDidMount() {
-    this.fetchUserData();
-  }
+    fetchUser();
+  }, []);
 
-  async fetchUserData() {
-    const { id } = this.state;
-    const user = await DataFetcher.getDataFromAPI(`user/${id}`);
-    this.setState({ user });
-  }
-
-  renderUser() {
-    const { user } = this.state;
-    return (
-      <UserInfo user={user} />
-    );
-  }
-
-  render() {
-    const { user } = this.state;
-    return user ? this.renderUser() : null;
-  }
+  return <UserInfo user={user} />;
 }
-
-User.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.number
-    })
-  }),
-};
 
 export default User;

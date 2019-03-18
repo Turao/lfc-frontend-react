@@ -3,7 +3,6 @@ import { Card, CardContent, Typography } from '@material-ui/core';
 
 import FactCheckPropType from './proptype';
 
-
 function FactCheckInfo({ factcheck }) {
   return (
     <Card>
