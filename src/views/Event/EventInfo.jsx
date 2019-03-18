@@ -2,8 +2,7 @@ import React from 'react';
 import { Card, CardContent, Typography } from '@material-ui/core';
 import EventPropType from './proptype';
 
-function EventInfo(props) {
-  const { event } = props;
+function EventInfo({ event }) {
   return (
     <Card>
       <CardContent>
