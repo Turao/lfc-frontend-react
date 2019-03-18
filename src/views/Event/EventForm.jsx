@@ -132,7 +132,7 @@ function EventForm(props) {
           id="name"
           label="Name"
           value={name}
-          onChange={event => setName(event.value)}
+          onChange={event => setName(event.target.value)}
         />
 
         <Grid container alignItems="flex-start">
