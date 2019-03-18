@@ -1,34 +1,21 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
 import EventForm from './EventForm';
 
-
-class NewEvent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      redirect: null,
-    };
-  }
-
-  onSuccess = (event) => {
-    this.setState({ redirect: event });
-  }
-
-  onFailure = (error) => {
+function NewEvent() {
+  const [redirect, setRedirect] = useState(null);
+  const onSuccess = (event) => { setRedirect(event); };
+  const onFailure = (error) => {
     // flash error
     console.error('Unable to create event:', error.message);
-  }
+  };
 
-  render() {
-    const { redirect } = this.state;
-    return (
-      redirect
-        ? <Redirect to={`/event/${redirect.id}`} />
-        : <EventForm onSuccess={this.onSuccess} onFailure={this.onFailure} />
-    );
-  }
+  return (
+    redirect
+      ? <Redirect to={`/event/${redirect.id}`} />
+      : <EventForm onSuccess={onSuccess} onFailure={onFailure} />
+  );
 }
 
 export default NewEvent;

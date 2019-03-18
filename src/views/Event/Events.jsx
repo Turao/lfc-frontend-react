@@ -1,51 +1,29 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
 
 import DataFetcher from '../../dataFetcher';
 import EventInfo from './EventInfo';
 
-class Events extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      allEvents: null,
-      latestEvents: null,
-    };
-  }
+function Events() {
+  const [events, setEvents] = useState([]);
 
-  componentDidMount() {
-    this.fetchLatestEvents();
-    this.fetchAllEvents();
-  }
+  useEffect(async () => {
+    const data = await DataFetcher.getDataFromAPI('events');
+    setEvents(data);
+    console.log(data, events);
+  }, []);
 
-  async fetchLatestEvents() {
-    const latestEvents = await DataFetcher.getDataFromAPI('events/latest');
-    this.setState({ latestEvents });
-  }
+  return (
+    <React.Fragment>
+      { events.map(event => <EventInfo event={event} key={event.id} />) }
 
-  async fetchAllEvents() {
-    const allEvents = await DataFetcher.getDataFromAPI('events');
-    this.setState({ allEvents });
-  }
-
-  renderLatestEvents() {
-    const { latestEvents } = this.state;
-    return latestEvents.map(event => <EventInfo event={event} key={event.id} />);
-  }
-
-  renderAllEvents() {
-    const { allEvents } = this.state;
-    return allEvents.map(event => <EventInfo event={event} key={event.id} />);
-  }
-
-  render() {
-    const { latestEvents, allEvents } = this.state;
-    return (
-      <React.Fragment>
-        { latestEvents ? this.renderLatestEvents() : null }
-        { allEvents ? this.renderAllEvents() : null }
-      </React.Fragment>
-    );
-  }
+      <Button href="/event/new">
+        <AddIcon />
+        Add Event
+      </Button>
+    </React.Fragment>
+  );
 }
 
 export default Events;

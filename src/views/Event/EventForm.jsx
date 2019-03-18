@@ -1,43 +1,44 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import FormGroup from '@material-ui/core/FormGroup';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 
 import MUIDataTable from 'mui-datatables';
 
 import DataFetcher from '../../dataFetcher';
-import { Grid } from '@material-ui/core';
 
 
-class EventForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-      selectedOrganization: null,
-      selectedModerators: [],
+function EventForm(props) {
+  const [name, setName] = useState('');
+  const [selectedOrganization, setSelectedOrganization] = useState(null);
+  const [selectedModerators, setSelectedModerators] = useState([]);
 
-      organizations: [],
-      moderators: [],
-    };
-  }
 
-  componentDidMount() {
-    this.fetchOrganizations();
-    this.fetchModerators();
-  }
+  const [organizations, setOrganizations] = useState([]);
+  const fetchOrganizations = async (params) => {
+    const data = await DataFetcher.getDataFromAPI('organizations');
+    setOrganizations(data);
+  };
 
-  handleSubmit = async (_event) => {
+  const [moderators, setModerators] = useState([]);
+  const fetchModerators = async (params) => {
+    const data = await DataFetcher.getDataFromAPI('users');
+    setModerators(data);
+  };
+
+  useEffect(() => {
+    fetchOrganizations();
+    fetchModerators();
+  }, []);
+
+
+  const handleSubmit = async (_event) => {
     _event.preventDefault();
 
-    const {
-      name,
-      selectedOrganization,
-      selectedModerators,
-    } = this.state;
-    const { onSuccess, onFailure } = this.props;
+    const { onSuccess, onFailure } = props;
 
     const data = {
       event: {
@@ -53,27 +54,10 @@ class EventForm extends Component {
     } catch (error) {
       onFailure(error);
     }
-  }
-
-  handleChange = prop => (event) => {
-    this.setState({
-      [prop]: event.target.value,
-    });
-  }
-
-  async fetchOrganizations(params) {
-    const organizations = await DataFetcher.getDataFromAPI('organizations');
-    this.setState({ organizations });
-  }
-
-  async fetchModerators(params) {
-    const moderators = await DataFetcher.getDataFromAPI('users');
-    this.setState({ moderators });
-  }
+  };
 
 
-  renderModeratorsDataTable() {
-    const { moderators } = this.state;
+  const renderModeratorsDataTable = () => {
     const columns = [{
       name: 'id',
       label: 'id',
@@ -111,8 +95,7 @@ class EventForm extends Component {
   }
 
 
-  renderOrganizationsDataTable() {
-    const { organizations } = this.state;
+  const renderOrganizationsDataTable = () => {
     const columns = [{
       name: 'id',
       label: 'id',
@@ -139,37 +122,29 @@ class EventForm extends Component {
         options={options}
       />
     );
-  }
+  };
 
-  render() {
-    const {
-      name,
-      organizations,
-      moderators,
-    } = this.state;
+  return (
+    <form onSubmit={handleSubmit}>
+      <FormGroup>
 
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <FormGroup>
+        <TextField
+          id="name"
+          label="Name"
+          value={name}
+          onChange={event => setName(event.value)}
+        />
 
-          <TextField
-            id="name"
-            label="Name"
-            value={name}
-            onChange={this.handleChange('name')}
-          />
+        <Grid container alignItems="flex-start">
+          { renderModeratorsDataTable() }
+          { renderOrganizationsDataTable() }
+        </Grid>
 
-          <Grid container alignItems="flex-start">
-            { moderators ? this.renderModeratorsDataTable() : null }
-            { organizations ? this.renderOrganizationsDataTable() : null }
-          </Grid>
+        <Button type="submit"> Create Event </Button>
 
-          <Button type="submit"> Create Event </Button>
-
-        </FormGroup>
-      </form>
-    );
-  }
+      </FormGroup>
+    </form>
+  );
 }
 
 EventForm.propTypes = {
