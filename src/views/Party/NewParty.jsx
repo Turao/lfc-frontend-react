@@ -1,34 +1,21 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
 import PartyForm from './PartyForm';
 
-
-class NewParty extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      redirect: null,
-    };
-  }
-
-  onSuccess = (party) => {
-    this.setState({ redirect: party });
-  }
-
-  onFailure = (error) => {
+function NewParty() {
+  const [redirect, setRedirect] = useState(null);
+  const onSuccess = (party) => { setRedirect(party); };
+  const onFailure = (error) => {
     // flash error
     console.error('Unable to create party:', error.message);
-  }
+  };
 
-  render() {
-    const { redirect } = this.state;
-    return (
-      redirect
-        ? <Redirect to={`/party/${redirect.id}`} />
-        : <PartyForm onSuccess={this.onSuccess} onFailure={this.onFailure} />
-    );
-  }
+  return (
+    redirect
+      ? <Redirect to={`/party/${redirect.id}`} />
+      : <PartyForm onSuccess={onSuccess} onFailure={onFailure} />
+  );
 }
 
 export default NewParty;

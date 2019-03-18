@@ -1,34 +1,36 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
 
 import DataFetcher from '../../dataFetcher';
 import PartyInfo from './PartyInfo';
 
-class Parties extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      parties: null,
+function Parties() {
+  const [parties, setParties] = useState([]);
+
+  useEffect(() => {
+    const fetchParties = async () => {
+      const data = await DataFetcher.getDataFromAPI('parties');
+      setParties(data);
     };
-  }
 
-  componentDidMount() {
-    this.fetchPartiesData();
-  }
+    fetchParties();
+  });
 
-  async fetchPartiesData() {
-    const parties = await DataFetcher.getDataFromAPI('parties');
-    this.setState({ parties });
-  }
+  return (
+    <React.Fragment>
 
-  renderParties() {
-    const { parties } = this.state;
-    return parties.map(party => <PartyInfo party={party} key={party.id} />);
-  }
+      {parties.map(party => (
+        <PartyInfo party={party} key={party.id} />
+      ))}
 
-  render() {
-    const { parties } = this.state;
-    return parties ? this.renderParties() : null;
-  }
+      <Button href="/party/new">
+        <AddIcon />
+        Add Party
+      </Button>
+    </React.Fragment>
+  );
 }
 
 export default Parties;
