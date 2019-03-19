@@ -4,7 +4,7 @@ import DataFetcher from '../../dataFetcher';
 import UserInfo from './UserInfo';
 
 function User(props) {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -15,7 +15,7 @@ function User(props) {
     fetchUser();
   }, []);
 
-  return <UserInfo user={user} />;
+  return user ? <UserInfo user={user} /> : null;
 }
 
 export default User;

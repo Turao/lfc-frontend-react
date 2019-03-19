@@ -23,7 +23,7 @@ function Parties() {
     <React.Fragment>
 
       {parties.map(party => (
-        <Link to={`/party/${party.id}`}>
+        <Link to={`/party/${party.id}`} key={party.id}>
           <PartyInfo party={party} key={party.id} />
         </Link>
       ))}

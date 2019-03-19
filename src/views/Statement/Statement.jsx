@@ -4,7 +4,7 @@ import DataFetcher from '../../dataFetcher';
 import StatementInfo from './StatementInfo';
 
 function Statement(props) {
-  const [statement, setStatement] = useState({});
+  const [statement, setStatement] = useState();
 
   useEffect(() => {
     const fetchStatement = async () => {
@@ -15,7 +15,7 @@ function Statement(props) {
     fetchStatement();
   }, []);
 
-  return <StatementInfo statement={statement} />;
+  return statement ? <StatementInfo statement={statement} /> : null;
 }
 
 export default Statement;

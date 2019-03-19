@@ -22,7 +22,7 @@ function Events() {
   return (
     <React.Fragment>
       { events.map(event => (
-        <Link to={`/event/${event.id}`}>
+        <Link to={`/event/${event.id}`} key={event.id}>
           <EventInfo event={event} key={event.id} />
         </Link>
       )) }

@@ -23,7 +23,7 @@ function FactChecks() {
     <React.Fragment>
 
       {factchecks.map(factcheck => (
-        <Link to={`/factcheck/${factcheck.id}`}>
+        <Link to={`/factcheck/${factcheck.id}`} key={factcheck.id}>
           <FactCheckInfo factcheck={factcheck} key={factcheck.id} />
         </Link>
       ))}

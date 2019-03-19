@@ -20,7 +20,7 @@ function Users() {
     <React.Fragment>
 
       {users.map(user => (
-        <Link to={`/user/${user.id}`}>
+        <Link to={`/user/${user.id}`} key={user.id}>
           <UserInfo user={user} key={user.id} />
         </Link>
       ))}

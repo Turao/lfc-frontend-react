@@ -4,7 +4,7 @@ import DataFetcher from '../../dataFetcher';
 import PartyInfo from './PartyInfo';
 
 function Party(props) {
-  const [party, setParty] = useState({});
+  const [party, setParty] = useState(null);
 
   useEffect(() => {
     const fetchParty = async () => {
@@ -15,7 +15,7 @@ function Party(props) {
     fetchParty();
   }, []);
 
-  return <PartyInfo party={party} />;
+  return party ? <PartyInfo party={party} /> : null;
 }
 
 export default Party;

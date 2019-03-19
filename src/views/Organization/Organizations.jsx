@@ -23,7 +23,7 @@ function Organizations() {
     <React.Fragment>
 
       {organizations.map(organization => (
-        <Link to={`/organization/${organization.id}`}>
+        <Link to={`/organization/${organization.id}`} key={organization.id}>
           <OrganizationInfo organization={organization} key={organization.id} />
         </Link>
       ))}

@@ -4,7 +4,7 @@ import DataFetcher from '../../dataFetcher';
 import OrganizationInfo from './OrganizationInfo';
 
 function Organization(props) {
-  const [organization, setOrganization] = useState({});
+  const [organization, setOrganization] = useState(null);
 
   useEffect(() => {
     const fetchOrganization = async () => {
@@ -15,7 +15,7 @@ function Organization(props) {
     fetchOrganization();
   }, []);
 
-  return <OrganizationInfo organization={organization} />;
+  return organization ? <OrganizationInfo organization={organization} /> : null;
 }
 
 export default Organization;

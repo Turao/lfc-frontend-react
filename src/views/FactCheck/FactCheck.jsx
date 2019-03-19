@@ -4,7 +4,7 @@ import DataFetcher from '../../dataFetcher';
 import FactCheckInfo from './FactCheckInfo';
 
 function FactCheck(props) {
-  const [factcheck, setFactCheck] = useState({});
+  const [factcheck, setFactCheck] = useState(null);
 
   useEffect(() => {
     const fetchFactCheck = async () => {
@@ -15,7 +15,7 @@ function FactCheck(props) {
     fetchFactCheck();
   }, []);
 
-  return <FactCheckInfo factcheck={factcheck} />;
+  return factcheck ? <FactCheckInfo factcheck={factcheck} /> : null;
 }
 
 export default FactCheck;

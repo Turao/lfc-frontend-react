@@ -4,7 +4,7 @@ import DataFetcher from '../../dataFetcher';
 import EventInfo from './EventInfo';
 
 function Event(props) {
-  const [event, setEvent] = useState([]);
+  const [event, setEvent] = useState(null);
 
   useEffect(() => {
     const fetchEvent = async () => {
@@ -15,7 +15,7 @@ function Event(props) {
     fetchEvent();
   }, []);
 
-  return <EventInfo event={event} />;
+  return event ? <EventInfo event={event} /> : null;
 }
 
 export default Event;

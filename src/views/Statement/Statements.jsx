@@ -23,7 +23,7 @@ function Statements() {
     <React.Fragment>
 
       {statements.map(statement => (
-        <Link to={`/statement/${statement.id}`}>
+        <Link to={`/statement/${statement.id}`} key={statement.id}>
           <StatementInfo statement={statement} key={statement.id} />
         </Link>
       ))}
