@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
@@ -22,7 +23,9 @@ function Parties() {
     <React.Fragment>
 
       {parties.map(party => (
-        <PartyInfo party={party} key={party.id} />
+        <Link to={`/party/${party.id}`}>
+          <PartyInfo party={party} key={party.id} />
+        </Link>
       ))}
 
       <Button href="/party/new">

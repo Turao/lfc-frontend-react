@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import DataFetcher from '../../dataFetcher';
 import UserInfo from './UserInfo';
@@ -19,7 +20,9 @@ function Users() {
     <React.Fragment>
 
       {users.map(user => (
-        <UserInfo user={user} key={user.id} />
+        <Link to={`/user/${user.id}`}>
+          <UserInfo user={user} key={user.id} />
+        </Link>
       ))}
 
     </React.Fragment>

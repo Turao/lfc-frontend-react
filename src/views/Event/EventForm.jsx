@@ -4,9 +4,8 @@ import PropTypes from 'prop-types';
 import FormGroup from '@material-ui/core/FormGroup';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
 
-import MUIDataTable from 'mui-datatables';
+import Select from 'react-select';
 
 import DataFetcher from '../../dataFetcher';
 
@@ -14,24 +13,16 @@ import DataFetcher from '../../dataFetcher';
 function EventForm({ onSuccess, onFailure }) {
   const [name, setName] = useState('');
   const [selectedOrganization, setSelectedOrganization] = useState(null);
-  const [selectedModerators, setSelectedModerators] = useState([]);
 
 
   const [organizations, setOrganizations] = useState([]);
-  const fetchOrganizations = async (params) => {
-    const data = await DataFetcher.getDataFromAPI('organizations');
-    setOrganizations(data);
-  };
-
-  const [moderators, setModerators] = useState([]);
-  const fetchModerators = async (params) => {
-    const data = await DataFetcher.getDataFromAPI('users');
-    setModerators(data);
-  };
-
   useEffect(() => {
+    const fetchOrganizations = async (params) => {
+      const data = await DataFetcher.getDataFromAPI('organizations');
+      setOrganizations(data);
+    };
+
     fetchOrganizations();
-    fetchModerators();
   }, []);
 
 
@@ -41,8 +32,7 @@ function EventForm({ onSuccess, onFailure }) {
     const data = {
       event: {
         name,
-        organization: selectedOrganization,
-        moderators: selectedModerators,
+        organizationId: selectedOrganization.value.id,
       },
     };
 
@@ -54,70 +44,18 @@ function EventForm({ onSuccess, onFailure }) {
     }
   };
 
-
-  const renderModeratorsDataTable = () => {
-    const columns = [{
-      name: 'id',
-      label: 'id',
-      options: { display: 'excluded' },
-    },
-    {
-      name: 'username',
-      label: 'Username',
-    },
-    {
-      name: 'firstName',
-      label: 'First Name',
-    },
-    {
-      name: 'lastName',
-      label: 'Last Name',
-    }];
-
-    const options = {
-      selectableRows: true,
-      filter: false,
-      print: false,
-      download: false,
-      onRowClick: (data, meta) => console.log(data, meta),
-    };
+  const renderOrganizationsSelector = () => {
+    const options = organizations.map(o => ({
+      value: o,
+      label: o.name,
+    }));
 
     return (
-      <MUIDataTable
-        title="Moderators"
-        data={moderators}
-        columns={columns}
+      <Select
+        label="Organization"
+        value={selectedOrganization}
         options={options}
-      />
-    );
-  }
-
-
-  const renderOrganizationsDataTable = () => {
-    const columns = [{
-      name: 'id',
-      label: 'id',
-      options: { display: 'excluded' },
-    },
-    {
-      name: 'name',
-      label: 'Name',
-    }];
-
-    const options = {
-      selectableRows: true,
-      filter: false,
-      print: false,
-      download: false,
-      onRowClick: (data, meta) => console.log(data, meta),
-    };
-
-    return (
-      <MUIDataTable
-        title="Organizations"
-        data={organizations}
-        columns={columns}
-        options={options}
+        onChange={setSelectedOrganization}
       />
     );
   };
@@ -133,10 +71,7 @@ function EventForm({ onSuccess, onFailure }) {
           onChange={event => setName(event.target.value)}
         />
 
-        <Grid container alignItems="flex-start">
-          { renderModeratorsDataTable() }
-          { renderOrganizationsDataTable() }
-        </Grid>
+        { renderOrganizationsSelector() }
 
         <Button type="submit"> Create Event </Button>
 

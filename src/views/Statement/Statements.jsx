@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
@@ -22,7 +23,9 @@ function Statements() {
     <React.Fragment>
 
       {statements.map(statement => (
-        <StatementInfo statement={statement} key={statement.id} />
+        <Link to={`/statement/${statement.id}`}>
+          <StatementInfo statement={statement} key={statement.id} />
+        </Link>
       ))}
 
       <Button href="/statement/new">

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
@@ -22,7 +23,9 @@ function Organizations() {
     <React.Fragment>
 
       {organizations.map(organization => (
-        <OrganizationInfo organization={organization} key={organization.id} />
+        <Link to={`/organization/${organization.id}`}>
+          <OrganizationInfo organization={organization} key={organization.id} />
+        </Link>
       ))}
 
       <Button href="/organization/new">

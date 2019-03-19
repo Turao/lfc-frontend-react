@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 
@@ -19,7 +21,11 @@ function Events() {
 
   return (
     <React.Fragment>
-      { events.map(event => <EventInfo event={event} key={event.id} />) }
+      { events.map(event => (
+        <Link to={`/event/${event.id}`}>
+          <EventInfo event={event} key={event.id} />
+        </Link>
+      )) }
 
       <Button href="/event/new">
         <AddIcon />
