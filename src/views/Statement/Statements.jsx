@@ -12,7 +12,7 @@ function Statements() {
 
   useEffect(() => {
     const fetchStatements = async () => {
-      const data = await DataFetcher.getDataFromAPI('statements');
+      const data = await DataFetcher.get('statements');
       setStatements(data);
     };
 

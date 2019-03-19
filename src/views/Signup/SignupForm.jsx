@@ -42,7 +42,7 @@ function SignupForm({ onSuccess, onFailure }) {
     };
 
     try {
-      const response = await DataFetcher.sendDataToAPI('signup', data);
+      const response = await DataFetcher.post('signup', data);
       const { user } = response;
       onSuccess(user);
     } catch (error) {

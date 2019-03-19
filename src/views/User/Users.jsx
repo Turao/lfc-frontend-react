@@ -9,7 +9,7 @@ function Users() {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const data = await DataFetcher.getDataFromAPI('users');
+      const data = await DataFetcher.get('users');
       setUsers(data);
     };
 

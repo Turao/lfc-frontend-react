@@ -18,7 +18,7 @@ function EventForm({ onSuccess, onFailure }) {
   const [organizations, setOrganizations] = useState([]);
   useEffect(() => {
     const fetchOrganizations = async (params) => {
-      const data = await DataFetcher.getDataFromAPI('organizations');
+      const data = await DataFetcher.get('organizations');
       setOrganizations(data);
     };
 
@@ -37,7 +37,7 @@ function EventForm({ onSuccess, onFailure }) {
     };
 
     try {
-      const event = await DataFetcher.sendDataToAPI('event', data);
+      const event = await DataFetcher.post('event', data);
       onSuccess(event);
     } catch (error) {
       onFailure(error);

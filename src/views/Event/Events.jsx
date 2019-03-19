@@ -12,7 +12,7 @@ function Events() {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      const data = await DataFetcher.getDataFromAPI('events');
+      const data = await DataFetcher.get('events');
       setEvents(data);
     };
 

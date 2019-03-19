@@ -8,7 +8,7 @@ function User(props) {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const data = await DataFetcher.getDataFromAPI(`user/${props.match.params.id}`);
+      const data = await DataFetcher.get(`user/${props.match.params.id}`);
       setUser(data);
     };
 

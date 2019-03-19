@@ -12,7 +12,7 @@ function Parties() {
 
   useEffect(() => {
     const fetchParties = async () => {
-      const data = await DataFetcher.getDataFromAPI('parties');
+      const data = await DataFetcher.get('parties');
       setParties(data);
     };
 

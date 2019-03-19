@@ -8,7 +8,7 @@ function Event(props) {
 
   useEffect(() => {
     const fetchEvent = async () => {
-      const data = await DataFetcher.getDataFromAPI(`event/${props.match.params.id}`);
+      const data = await DataFetcher.get(`event/${props.match.params.id}`);
       setEvent(data);
     };
 

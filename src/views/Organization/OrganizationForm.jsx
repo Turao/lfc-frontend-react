@@ -19,7 +19,7 @@ function OrganizationForm({ onSuccess, onFailure }) {
     };
 
     try {
-      const organization = await DataFetcher.sendDataToAPI('organization', data);
+      const organization = await DataFetcher.post('organization', data);
       onSuccess(organization);
     } catch (error) {
       onFailure(error);

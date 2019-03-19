@@ -8,7 +8,7 @@ function Statement(props) {
 
   useEffect(() => {
     const fetchStatement = async () => {
-      const data = await DataFetcher.getDataFromAPI(`statement/${props.match.params.id}`);
+      const data = await DataFetcher.get(`statement/${props.match.params.id}`);
       setStatement(data);
     };
 

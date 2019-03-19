@@ -21,7 +21,7 @@ function StatementForm({ onSuccess, onFailure }) {
   //   };
 
   //   try {
-  //     const statement = await DataFetcher.sendDataToAPI('statement', data);
+  //     const statement = await DataFetcher.post('statement', data);
   //     onSuccess(statement);
   //   } catch (error) {
   //     onFailure(error);

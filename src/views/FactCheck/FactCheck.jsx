@@ -8,7 +8,7 @@ function FactCheck(props) {
 
   useEffect(() => {
     const fetchFactCheck = async () => {
-      const data = await DataFetcher.getDataFromAPI(`factcheck/${props.match.params.id}`);
+      const data = await DataFetcher.get(`factcheck/${props.match.params.id}`);
       setFactCheck(data);
     };
 

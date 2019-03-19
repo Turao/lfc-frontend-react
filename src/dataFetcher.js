@@ -1,14 +1,5 @@
-const DataFetcher = {
-
-  async getDataFromAPI(endpoint) {
-    return this.fetchData(endpoint, 'GET');
-  },
-
-  async sendDataToAPI(endpoint, data) {
-    return this.fetchData(endpoint, 'POST', data);
-  },
-
-  async fetchData(endpoint, method, data) {
+const DataFetcher = () => {
+  const fetchData = async (endpoint, method, data) => {
     const url = new URL(endpoint, 'http://api.localhost:3001/');
 
     const response = await fetch(url, {
@@ -28,8 +19,21 @@ const DataFetcher = {
     }
 
     throw Error(`${response.statusText} (${response.status})`);
-  },
+  };
 
+  const get = async endpoint => fetchData(endpoint, 'GET');
+  const del = async endpoint => fetchData(endpoint, 'DELETE');
+  const post = async (endpoint, data) => fetchData(endpoint, 'POST', data);
+  const put = async (endpoint, data) => fetchData(endpoint, 'PUT', data);
+  const patch = async (endpoint, data) => fetchData(endpoint, 'PATCH', data);
+
+  return {
+    get,
+    del,
+    post,
+    put,
+    patch,
+  };
 };
 
-export default DataFetcher;
+export default DataFetcher();

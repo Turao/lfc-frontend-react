@@ -8,7 +8,7 @@ function Organization(props) {
 
   useEffect(() => {
     const fetchOrganization = async () => {
-      const data = await DataFetcher.getDataFromAPI(`organization/${props.match.params.id}`);
+      const data = await DataFetcher.get(`organization/${props.match.params.id}`);
       setOrganization(data);
     };
 

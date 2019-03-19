@@ -12,7 +12,7 @@ function Organizations() {
 
   useEffect(() => {
     const fetchOrganizations = async () => {
-      const data = await DataFetcher.getDataFromAPI('organizations');
+      const data = await DataFetcher.get('organizations');
       setOrganizations(data);
     };
 

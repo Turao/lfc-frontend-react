@@ -9,7 +9,7 @@ function Account() {
   useEffect(() => {
     const fetchUser = async () => {
       const id = sessionStorage.getItem('user.id');
-      const data = await DataFetcher.getDataFromAPI(`user/${id}`);
+      const data = await DataFetcher.get(`user/${id}`);
       setUser(data);
     };
 

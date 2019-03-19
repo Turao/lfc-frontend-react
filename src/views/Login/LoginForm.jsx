@@ -36,7 +36,7 @@ function LoginForm({ onSuccess, onFailure }) {
     };
 
     try {
-      const response = await DataFetcher.sendDataToAPI('login', data);
+      const response = await DataFetcher.post('login', data);
       const { user, token } = response;
       onSuccess(user, token);
     } catch (error) {

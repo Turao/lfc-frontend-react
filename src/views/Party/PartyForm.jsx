@@ -21,7 +21,7 @@ function PartyForm({ onSuccess, onFailure }) {
     };
 
     try {
-      const party = await DataFetcher.sendDataToAPI('party', data);
+      const party = await DataFetcher.post('party', data);
       onSuccess(party);
     } catch (error) {
       onFailure(error);

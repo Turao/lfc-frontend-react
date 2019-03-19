@@ -8,7 +8,7 @@ function Party(props) {
 
   useEffect(() => {
     const fetchParty = async () => {
-      const data = await DataFetcher.getDataFromAPI(`party/${props.match.params.id}`);
+      const data = await DataFetcher.get(`party/${props.match.params.id}`);
       setParty(data);
     };
 

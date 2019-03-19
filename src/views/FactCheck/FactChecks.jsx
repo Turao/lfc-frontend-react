@@ -12,7 +12,7 @@ function FactChecks() {
 
   useEffect(() => {
     const fetchFactChecks = async () => {
-      const data = await DataFetcher.getDataFromAPI('factchecks');
+      const data = await DataFetcher.get('factchecks');
       setFactChecks(data);
     };
 
