@@ -12,10 +12,13 @@ const DataFetcher = () => {
       body: JSON.stringify(data),
     });
 
-    if (response.ok && response.body) {
-      const res = await response.json();
-      console.log(res);
-      return res;
+    if (response.ok) {
+      try {
+        const res = await response.json();
+        return res;
+      } catch (_) {
+        return {}; // could not decode json
+      }
     }
 
     throw Error(`${response.statusText} (${response.status})`);
