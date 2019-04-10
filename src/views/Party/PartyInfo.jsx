@@ -4,6 +4,7 @@ import { Card, CardContent, Typography } from '@material-ui/core';
 import PartyPropType from './proptype';
 
 function PartyInfo({ party }) {
+  console.log(party);
   return (
     <Card>
       <CardContent>

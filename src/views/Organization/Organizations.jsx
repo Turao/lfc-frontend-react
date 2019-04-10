@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import Button from '@material-ui/core/Button';
+import {
+  Button,
+  List,
+  ListItem,
+} from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 
 import DataFetcher from '../../dataFetcher';
@@ -19,14 +23,18 @@ function Organizations() {
     fetchOrganizations();
   }, []);
 
+  const renderOrganizationInfo = organization => (
+    <ListItem button component={Link} to={`organization/${organization.id}`}>
+      <OrganizationInfo organization={organization} />
+    </ListItem>
+  );
+
   return (
     <React.Fragment>
 
-      {organizations.map(organization => (
-        <Link to={`/organization/${organization.id}`} key={organization.id}>
-          <OrganizationInfo organization={organization} key={organization.id} />
-        </Link>
-      ))}
+      <List>
+        { organizations.map(organization => renderOrganizationInfo(organization)) }
+      </List>
 
       <Button href="/organization/new">
         <AddIcon />

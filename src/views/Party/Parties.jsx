@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import Button from '@material-ui/core/Button';
+import {
+  Button,
+  List,
+  ListItem,
+} from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 
 import DataFetcher from '../../dataFetcher';
@@ -19,14 +23,18 @@ function Parties() {
     fetchParties();
   }, []);
 
+  const renderPartyInfo = party => (
+    <ListItem button component={Link} to={`party/${party.id}`}>
+      <PartyInfo party={party} />
+    </ListItem>
+  );
+
   return (
     <React.Fragment>
 
-      {parties.map(party => (
-        <Link to={`/party/${party.id}`} key={party.id}>
-          <PartyInfo party={party} key={party.id} />
-        </Link>
-      ))}
+      <List>
+        { parties.map(party => renderPartyInfo(party)) }
+      </List>
 
       <Button href="/party/new">
         <AddIcon />

@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import {
+  List,
+  ListItem,
+} from '@material-ui/core';
 
 import DataFetcher from '../../dataFetcher';
 import UserInfo from './UserInfo';
@@ -16,16 +20,16 @@ function Users() {
     fetchUsers();
   }, []);
 
+  const renderUserInfo = user => (
+    <ListItem button component={Link} to={`user/${user.id}`}>
+      <UserInfo user={user} />
+    </ListItem>
+  );
+
   return (
-    <React.Fragment>
-
-      {users.map(user => (
-        <Link to={`/user/${user.id}`} key={user.id}>
-          <UserInfo user={user} key={user.id} />
-        </Link>
-      ))}
-
-    </React.Fragment>
+    <List>
+      { users.map(user => renderUserInfo(user)) }
+    </List>
   );
 }
 

@@ -4,6 +4,7 @@ import { Card, CardContent, Typography } from '@material-ui/core';
 import StatementPropType from './proptype';
 
 function StatementInfo({ statement }) {
+  console.log(statement);
   return (
     <Card>
       <CardContent>

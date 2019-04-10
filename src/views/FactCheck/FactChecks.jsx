@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import Button from '@material-ui/core/Button';
+import {
+  Button,
+  List,
+  ListItem,
+} from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 
 import DataFetcher from '../../dataFetcher';
@@ -19,14 +23,18 @@ function FactChecks() {
     fetchFactChecks();
   }, []);
 
+  const renderFactCheckInfo = factcheck => (
+    <ListItem button component={Link} to={`factchecks/${factcheck.id}`}>
+      <FactCheckInfo factcheck={factcheck} />
+    </ListItem>
+  );
+
   return (
     <React.Fragment>
 
-      {factchecks.map(factcheck => (
-        <Link to={`/factcheck/${factcheck.id}`} key={factcheck.id}>
-          <FactCheckInfo factcheck={factcheck} key={factcheck.id} />
-        </Link>
-      ))}
+      <List>
+        { factchecks.map(factcheck => renderFactCheckInfo(factcheck)) }
+      </List>
 
       <Button href="/factcheck/new">
         <AddIcon />

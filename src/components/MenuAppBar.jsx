@@ -7,6 +7,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 
 // bar content
+import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
@@ -23,17 +24,22 @@ function MenuAppBar({ title }) {
   };
 
   const renderNotLoggedInContent = () => (
-    <div>
+    <Grid container direction="row" justify="flex-end">
       <Button component={Link} to="/login"> Log In </Button>
       <Button component={Link} to="/signup"> Sign Up </Button>
-    </div>
+    </Grid>
   );
 
   const renderLoggedInContent = () => (
     <React.Fragment>
-      <Button component={Link} to="/events"> Events </Button>
-      <Button component={Link} to="/account"> Me </Button>
-      <Button component={Link} onClick={logout} to="/"> Log Out </Button>
+      <Grid container direction="row" justify="flex-start">
+        <Button component={Link} to="/events"> Events </Button>
+      </Grid>
+
+      <Grid container direction="row" justify="flex-end">
+        <Button component={Link} to="/account"> Me </Button>
+        <Button component={Link} onClick={logout} to="/"> Log Out </Button>
+      </Grid>
     </React.Fragment>
   );
 

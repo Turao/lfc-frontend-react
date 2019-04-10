@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import Button from '@material-ui/core/Button';
+import {
+  Button,
+  List,
+  ListItem,
+} from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 
 import DataFetcher from '../../dataFetcher';
@@ -19,14 +23,18 @@ function Statements() {
     fetchStatements();
   }, []);
 
+  const renderStatementInfo = statement => (
+    <ListItem button component={Link} to={`statement/${statement.id}`}>
+      <StatementInfo statement={statement} />
+    </ListItem>
+  );
+
   return (
     <React.Fragment>
 
-      {statements.map(statement => (
-        <Link to={`/statement/${statement.id}`} key={statement.id}>
-          <StatementInfo statement={statement} key={statement.id} />
-        </Link>
-      ))}
+      <List>
+        { statements.map(statement => renderStatementInfo(statement)) }
+      </List>
 
       <Button href="/statement/new">
         <AddIcon />

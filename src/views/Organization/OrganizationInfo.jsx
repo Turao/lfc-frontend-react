@@ -1,10 +1,15 @@
 import React from 'react';
-import { Card, CardContent, Typography } from '@material-ui/core';
+import {
+  Card,
+  CardContent,
+  Typography,
+} from '@material-ui/core';
 
 import OrganizationPropType from './proptype';
 
 
 function OrganizationInfo({ organization }) {
+  console.log(organization);
   return (
     <Card>
       <CardContent>

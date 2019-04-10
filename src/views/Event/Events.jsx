@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import Button from '@material-ui/core/Button';
+import {
+  Button,
+  List,
+  ListItem,
+} from '@material-ui/core';
+
 import AddIcon from '@material-ui/icons/Add';
 
 import DataFetcher from '../../dataFetcher';
@@ -19,18 +24,23 @@ function Events() {
     fetchEvents();
   }, []);
 
+  const renderEventInfo = event => (
+    <ListItem button component={Link} to={`event/${event.id}`}>
+      <EventInfo event={event} />
+    </ListItem>
+  );
+
   return (
     <React.Fragment>
-      { events.map(event => (
-        <Link to={`/event/${event.id}`} key={event.id}>
-          <EventInfo event={event} key={event.id} />
-        </Link>
-      )) }
-
-      <Button href="/event/new">
+      <Button href="/event/new" variant="text">
         <AddIcon />
         Add Event
       </Button>
+
+      <List>
+        { events.map(event => renderEventInfo(event)) }
+      </List>
+
     </React.Fragment>
   );
 }
